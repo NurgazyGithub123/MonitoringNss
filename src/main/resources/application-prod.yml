@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://10.16.230.181:5432/tech
+    username: postgres
+    password: beenav4242_
+  jpa:
+    generate-ddl: true
