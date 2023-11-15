@@ -34,7 +34,13 @@ public class AsrController {
 
     @GetMapping("/getAll")
     public List<Asr> getAll(){
-         return asrRepo.findAll();
+
+        return   asrService.getAll();
+    }
+
+    @GetMapping("/getAllByNeNameAndStartTime")
+    public List<Asr> getAllByNeNameAndStartTime(){
+        return asrRepo.getAllByNeNameAndStartTime();
     }
 
    // find/id

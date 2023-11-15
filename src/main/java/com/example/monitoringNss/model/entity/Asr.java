@@ -18,7 +18,7 @@ import java.util.Date;
 public class Asr extends BaseEntity{
 
 
-    @Column(name = "startTime", nullable = false)
+    @Column(nullable = false)
     LocalDateTime startTime;
 
     String neName;
@@ -28,12 +28,6 @@ public class Asr extends BaseEntity{
     Long localSubscribers;
 
     Long roamingSubscribers;
-
-    Date date;
-
-    LocalTime time;
-
-    int year;
 
     String rnc;
 

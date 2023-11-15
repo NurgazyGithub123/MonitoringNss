@@ -5,10 +5,16 @@ import com.example.monitoringNss.model.entity.Asr;
 import com.example.monitoringNss.model.request.CreateAsrRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface AsrService {
         Asr create(CreateAsrRequest request);
 
         Asr getById(Long id);
-        
+
+        List<Asr> getAll();
+
+
+        List<Asr> getAllByNeNameAndStartTime();
 }
