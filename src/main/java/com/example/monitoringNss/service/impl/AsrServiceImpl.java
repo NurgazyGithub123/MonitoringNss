@@ -3,6 +3,7 @@ package com.example.monitoringNss.service.impl;
 import com.example.monitoringNss.model.dto.AsrDto;
 import com.example.monitoringNss.model.entity.Asr;
 import com.example.monitoringNss.model.request.CreateAsrRequest;
+import com.example.monitoringNss.repository.AsrRegionRepo;
 import com.example.monitoringNss.repository.AsrRepo;
 import com.example.monitoringNss.service.AsrService;
 import lombok.AccessLevel;
@@ -11,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,12 +20,13 @@ import java.util.List;
 public class AsrServiceImpl implements AsrService {
 
     @NonNull AsrRepo asrRepo;
+    @NonNull AsrRegionRepo asrRegionRepo;
+
 
     public Asr create(CreateAsrRequest request){
         Asr asr = new Asr();
         asr.setNeName(request.getNeName());
         asr.setStartTime(request.getStartTime());
-        asr.setObjectInstance(request.getObjectInstance());
         asr.setLocalSubscribers(request.getLocalSubscribers());
         asr.setRoamingSubscribers(request.getRoamingSubscribers());
 
@@ -45,9 +46,13 @@ public class AsrServiceImpl implements AsrService {
     }
 
     @Override
-    public List<Asr > getAllByNeNameAndStartTime() {
+    public List<AsrDto > getAllByNeNameAndStartTime() {
         return asrRepo.getAllByNeNameAndStartTime();
     }
 
+    @Override
+    public List<Asr> getAllbyRegion(String region) {
+        return asrRegionRepo.getAllbyRegion(region);
+    }
 
 }

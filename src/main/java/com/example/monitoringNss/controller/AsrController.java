@@ -1,5 +1,6 @@
 package com.example.monitoringNss.controller;
 
+import com.example.monitoringNss.model.dto.AsrDto;
 import com.example.monitoringNss.model.entity.Asr;
 import com.example.monitoringNss.model.request.CreateAsrRequest;
 import com.example.monitoringNss.repository.AsrRepo;
@@ -34,13 +35,12 @@ public class AsrController {
 
     @GetMapping("/getAll")
     public List<Asr> getAll(){
-
         return   asrService.getAll();
     }
 
     @GetMapping("/getAllByNeNameAndStartTime")
-    public List<Asr> getAllByNeNameAndStartTime(){
-        return asrRepo.getAllByNeNameAndStartTime();
+    public List<AsrDto> getAllByNeNameAndStartTime(){
+        return asrService.getAllByNeNameAndStartTime();
     }
 
    // find/id
@@ -50,6 +50,13 @@ public class AsrController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(asrService.getById(id));
+    }
+
+    @GetMapping("/get/{region}") // http://localhost:8080/api/v1/asr/get/region(?)
+    public ResponseEntity<?> getByRegion(@PathVariable String region){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(asrService.getAllbyRegion(region));
     }
 
 }

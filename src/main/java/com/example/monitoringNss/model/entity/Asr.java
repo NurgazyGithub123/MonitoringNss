@@ -23,8 +23,6 @@ public class Asr extends BaseEntity{
 
     String neName;
 
-    String objectInstance;
-
     Long localSubscribers;
 
     Long roamingSubscribers;
