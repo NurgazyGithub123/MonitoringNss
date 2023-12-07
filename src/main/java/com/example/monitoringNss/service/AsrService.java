@@ -1,7 +1,7 @@
 package com.example.monitoringNss.service;
 
 import com.example.monitoringNss.model.dto.AsrDto;
-import com.example.monitoringNss.model.dto.AsrRegion;
+import com.example.monitoringNss.model.dto.AsrRegionRepoDto;
 import com.example.monitoringNss.model.entity.Asr;
 import com.example.monitoringNss.model.request.CreateAsrRequest;
 import org.springframework.stereotype.Service;
@@ -20,5 +20,7 @@ public interface AsrService {
         List<AsrDto> getAllByNeNameAndStartTime();
 
         List<Asr> getAllbyRegion(String region);
+
+        List<Asr> getAllisEmpty(String region);
 
 }

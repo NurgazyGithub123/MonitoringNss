@@ -22,8 +22,6 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AsrController {
 
-    private final AsrRepo asrRepo;
-
     @NonNull AsrService asrService;
 
     @PostMapping("/create")
@@ -35,15 +33,13 @@ public class AsrController {
 
     @GetMapping("/getAll")
     public List<Asr> getAll(){
-        return   asrService.getAll();
+        return  asrService.getAll();
     }
 
     @GetMapping("/getAllByNeNameAndStartTime")
     public List<AsrDto> getAllByNeNameAndStartTime(){
         return asrService.getAllByNeNameAndStartTime();
     }
-
-   // find/id
 
     @GetMapping("/get/{id}") // http://localhost:8080/api/v1/asr/get/id(?)
     public ResponseEntity<?> getById(@PathVariable Long id){
@@ -52,11 +48,18 @@ public class AsrController {
                 .body(asrService.getById(id));
     }
 
-    @GetMapping("/get/{region}") // http://localhost:8080/api/v1/asr/get/region(?)
+    @GetMapping("/getRegion/{region}") // http://localhost:8080/api/v1/asr/get/region(?)
     public ResponseEntity<?> getByRegion(@PathVariable String region){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(asrService.getAllbyRegion(region));
+    }
+
+    @GetMapping("/getAllIsEmpty/{region}") // http://localhost:8080/api/v1/asr/get/region(?)
+    public ResponseEntity<?> getAllisEmpty(@PathVariable String region){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(asrService.getAllisEmpty(region));
     }
 
 }
