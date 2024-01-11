@@ -1,11 +1,10 @@
 package com.example.monitoringNss.model.dto;
 
-
 import java.time.LocalDateTime;
 
+public interface AsrDto2 {
 
-public interface AsrDto {
-
+    AsrDto2 getId();
 
     LocalDateTime getStartTime();
 
@@ -13,4 +12,5 @@ public interface AsrDto {
 
     String getRegion();
 
+    int getLocalSubscribers();
 }

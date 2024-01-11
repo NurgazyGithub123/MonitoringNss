@@ -1,17 +1,17 @@
 package com.example.monitoringNss.service.impl;
 
 import com.example.monitoringNss.model.dto.AsrDto;
-import com.example.monitoringNss.model.dto.AsrRegionRepoDto;
+import com.example.monitoringNss.model.dto.AsrDto2;
 import com.example.monitoringNss.model.entity.Asr;
 import com.example.monitoringNss.model.request.CreateAsrRequest;
 import com.example.monitoringNss.repository.AsrRepo;
 import com.example.monitoringNss.service.AsrService;
 import lombok.AccessLevel;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +20,8 @@ import java.util.List;
 public class AsrServiceImpl implements AsrService {
 
 private final AsrRepo asrRepo;
+
+
 
     public Asr create(CreateAsrRequest request){
         Asr asr = new Asr();
@@ -64,4 +66,27 @@ private final AsrRepo asrRepo;
         }
         return getAllbyRegion(region);
     }
+
+    @Override
+    public Asr updateByID(Long id, Asr newAsr) {
+        Asr upAsr = asrRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Asr with id = " + id + "not found"));
+
+        Asr asr = new Asr();
+        asr.setId(upAsr.getId());
+        asr.setNeName(newAsr.getNeName());
+        asr.setRnc(newAsr.getRnc());
+        asr.setRegion(newAsr.getRegion());
+        asr.setLocalSubscribers(newAsr.getLocalSubscribers());
+        asr.setRoamingSubscribers(newAsr.getRoamingSubscribers());
+        asr.setStartTime(upAsr.getStartTime());
+
+        return asrRepo.save(asr);
+    }
+
+    @Override
+    public List<AsrDto2> getAllnewKPI() {
+         return asrRepo.getAllnewKPI();
+    }
+
 }

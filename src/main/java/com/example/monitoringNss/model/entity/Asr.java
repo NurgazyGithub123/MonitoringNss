@@ -28,4 +28,5 @@ public class Asr extends BaseEntity{
     String rnc;
 
     String region;
+
 }

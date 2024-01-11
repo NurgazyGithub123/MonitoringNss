@@ -16,6 +16,10 @@ public class CreateAsrRequest {
 
     String neName;
 
+    String rnc;
+
+    String region;
+
     String objectInstance;
 
     Long localSubscribers;

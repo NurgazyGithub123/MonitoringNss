@@ -1,6 +1,7 @@
 package com.example.monitoringNss.controller;
 
 import com.example.monitoringNss.model.dto.AsrDto;
+import com.example.monitoringNss.model.dto.AsrDto2;
 import com.example.monitoringNss.model.entity.Asr;
 import com.example.monitoringNss.model.request.CreateAsrRequest;
 import com.example.monitoringNss.repository.AsrRepo;
@@ -30,7 +31,6 @@ public class AsrController {
                 .status(HttpStatus.CREATED)
                 .body(asrService.create(createAsrRequest));
     }
-
     @GetMapping("/getAll")
     public List<Asr> getAll(){
         return  asrService.getAll();
@@ -60,6 +60,19 @@ public class AsrController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(asrService.getAllisEmpty(region));
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateEmpty(@RequestBody Asr newAsr, @PathVariable Long id){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(asrService.updateByID(id, newAsr));
+
+    }
+
+    @GetMapping("/getAllnewKPI")
+    public List<AsrDto2> getAllnewKPI(){
+
+        return asrService.getAllnewKPI();
     }
 
 }

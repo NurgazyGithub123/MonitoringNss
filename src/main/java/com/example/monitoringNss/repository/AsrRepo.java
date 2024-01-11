@@ -2,6 +2,7 @@ package com.example.monitoringNss.repository;
 
 
 import com.example.monitoringNss.model.dto.AsrDto;
+import com.example.monitoringNss.model.dto.AsrDto2;
 import com.example.monitoringNss.model.entity.Asr;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,7 @@ public interface AsrRepo extends JpaRepository<Asr, Long> {
 
     @Query(value = "SELECT * FROM tb_asr WHERE region =:region", nativeQuery = true)
     List<Asr> getAllbyRegion(@Param("region") String region);
+    @Query(value = "SELECT t.id as id, t.start_time as startTime, t.ne_name as neName, t.local_subscribers * 2 as LocalSubscribers, region FROM tb_asr t", nativeQuery = true)
+    List<AsrDto2> getAllnewKPI();
+
 }
