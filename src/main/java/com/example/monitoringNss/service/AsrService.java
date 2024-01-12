@@ -27,4 +27,6 @@ public interface AsrService {
         Asr updateByID(Long id, Asr asr);
 
         List<AsrDto2> getAllnewKPI();
+
+        List<AsrDto2> getAllnewKPI2();
 }

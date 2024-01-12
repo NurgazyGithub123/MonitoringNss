@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,6 +88,54 @@ private final AsrRepo asrRepo;
     @Override
     public List<AsrDto2> getAllnewKPI() {
          return asrRepo.getAllnewKPI();
+    }
+
+        @Override
+    public List<AsrDto2> getAllnewKPI2() {
+        List<AsrDto2> asrs = asrRepo.getAllnewKPI2();
+        List<AsrDto2> savedAsr = new ArrayList<>();
+
+            for (AsrDto2 asr: asrs) {
+                Asr asr1 = new Asr();
+                asr1.setId(asr.getId());
+                asr1.setStartTime(asr.getStartTime());
+                asr1.setNeName(asr.getNeName());
+                asr1.setLocalSubscribers(asr.getLocalSubscribers() *2);
+                asr1.setRegion(asr.getRegion());
+
+                savedAsr.add(castToAsr(asr1));
+
+            }
+            return savedAsr;
+    }
+
+    private AsrDto2 castToAsr(Asr asr){
+                return new AsrDto2() {
+                    @Override
+            public Long getId() {
+                return asr.getId();
+            }
+
+            @Override
+            public LocalDateTime getStartTime() {
+                return asr.getStartTime();
+            }
+
+            @Override
+            public String getNeName() {
+                return asr.getNeName();
+            }
+
+            @Override
+            public String getRegion() {
+                return asr.getRegion();
+            }
+
+            @Override
+            public Long getLocalSubscribers() {
+                return asr.getLocalSubscribers();
+            }
+        };
     }
 
 }

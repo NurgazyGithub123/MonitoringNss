@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public interface AsrDto2 {
 
-    AsrDto2 getId();
+    Long getId();
 
     LocalDateTime getStartTime();
 
@@ -12,5 +12,5 @@ public interface AsrDto2 {
 
     String getRegion();
 
-    int getLocalSubscribers();
+    Long getLocalSubscribers();
 }

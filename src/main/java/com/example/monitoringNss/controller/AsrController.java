@@ -4,7 +4,6 @@ import com.example.monitoringNss.model.dto.AsrDto;
 import com.example.monitoringNss.model.dto.AsrDto2;
 import com.example.monitoringNss.model.entity.Asr;
 import com.example.monitoringNss.model.request.CreateAsrRequest;
-import com.example.monitoringNss.repository.AsrRepo;
 import com.example.monitoringNss.service.AsrService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -73,6 +72,12 @@ public class AsrController {
     public List<AsrDto2> getAllnewKPI(){
 
         return asrService.getAllnewKPI();
+    }
+
+    @GetMapping("/getAllnewKPI2")
+    public List<AsrDto2> getAllnewKPI2(){
+
+        return asrService.getAllnewKPI2();
     }
 
 }
