@@ -1,4 +1,4 @@
-package com.example.monitoringNss.model.request;
+package com.example.monitoringNss.domain.model.request;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -19,8 +19,6 @@ public class CreateAsrRequest {
     String rnc;
 
     String region;
-
-    String objectInstance;
 
     Long localSubscribers;
 

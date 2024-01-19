@@ -1,4 +1,4 @@
-package com.example.monitoringNss.model.entity;
+package com.example.monitoringNss.domain.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

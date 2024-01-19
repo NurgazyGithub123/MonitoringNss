@@ -1,9 +1,9 @@
 package com.example.monitoringNss.controller;
 
-import com.example.monitoringNss.model.dto.AsrDto;
-import com.example.monitoringNss.model.dto.AsrDto2;
-import com.example.monitoringNss.model.entity.Asr;
-import com.example.monitoringNss.model.request.CreateAsrRequest;
+import com.example.monitoringNss.domain.dto.model.AsrDto;
+import com.example.monitoringNss.domain.dto.model.AsrDto2;
+import com.example.monitoringNss.domain.model.entity.Asr;
+import com.example.monitoringNss.domain.model.request.CreateAsrRequest;
 import com.example.monitoringNss.service.AsrService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

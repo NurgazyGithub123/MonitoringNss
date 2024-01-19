@@ -1,4 +1,4 @@
-package com.example.monitoringNss.model.entity;
+package com.example.monitoringNss.domain.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,8 +19,10 @@ public class Asr extends BaseEntity{
     @Column(nullable = false)
     LocalDateTime startTime;
 
+    @Column(nullable = false, length =50)
     String neName;
 
+    @Column(nullable = false)
     Long localSubscribers;
 
     Long roamingSubscribers;

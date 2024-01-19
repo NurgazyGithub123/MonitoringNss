@@ -1,4 +1,4 @@
-package com.example.monitoringNss.model.dto;
+package com.example.monitoringNss.domain.dto.model;
 
 
 import java.time.LocalDateTime;
