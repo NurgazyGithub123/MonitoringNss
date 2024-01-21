@@ -42,8 +42,6 @@ public class VlrSummary extends BaseEntity{
 
     String year;
 
-
-
-
+    String week;
 
 }

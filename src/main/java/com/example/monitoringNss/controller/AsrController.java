@@ -61,7 +61,7 @@ public class AsrController {
                 .body(asrService.getAllisEmpty(region));
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateEmpty(@RequestBody Asr newAsr, @PathVariable Long id){
+    public ResponseEntity<?> updateById(@RequestBody Asr newAsr, @PathVariable Long id){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(asrService.updateByID(id, newAsr));

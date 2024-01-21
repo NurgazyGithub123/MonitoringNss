@@ -19,8 +19,6 @@ import java.time.LocalTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class VlrSummaryKPI extends BaseEntity{
 
-    LocalDateTime startTime;
-
     String msxName;
 
     Long prepaid;
@@ -31,7 +29,7 @@ public class VlrSummaryKPI extends BaseEntity{
 
     Long total;
 
-    @Column(name = "bitel", nullable = false)
+    @Column(name = "postpaid", nullable = false)
     Long postpaid;
 
     Long vlr4g;
