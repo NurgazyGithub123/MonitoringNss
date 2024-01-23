@@ -2,23 +2,26 @@ package com.example.monitoringNss.domain.dto.model;
 
 import javax.persistence.Column;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-public interface VlrSummaryDto {
+public interface VlrSummaryKpiDto {
 
     String getMsxName();
 
-    Long getVlrLocal();
+    Long getPrepaid();
 
-    Long getVlrRoaming();
+    Long getRoaming();
 
-    Long getVlrCamel();
+    Long getCamel();
 
     Long getTotal();
 
-    Long getBitel();
+    Long getPostpaid();
 
-    Long getVlrSGs();
+    Long getVlr4g();
 
     LocalDate getDate();
+
+    String getMonth();
+
+    String getYear();
 }

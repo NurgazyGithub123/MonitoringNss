@@ -1,21 +1,16 @@
 package com.example.monitoringNss.service;
 
-import com.example.monitoringNss.domain.dto.model.VlrSummaryDto;
 import com.example.monitoringNss.domain.model.entity.VlrSummary;
-import com.example.monitoringNss.domain.model.request.CreateVlrSummaryRequest;
+import com.example.monitoringNss.domain.model.request.VlrSummaryRequest;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public interface VlrSummaryService {
 
-    VlrSummary create(CreateVlrSummaryRequest createVlrSummaryRequest);
+    VlrSummary create(VlrSummaryRequest createVlrSummaryRequest);
 
-    List<VlrSummary> saveData(List<VlrSummary> createVlrSummaryRequest);
-
-    //VlrSummary avgDay(String date);
-
+    List<VlrSummary> saveData(List<VlrSummaryRequest> createVlrSummaryRequest);
 
 }

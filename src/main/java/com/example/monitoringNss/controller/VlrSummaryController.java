@@ -1,11 +1,9 @@
 package com.example.monitoringNss.controller;
 
-import com.example.monitoringNss.domain.dto.model.AsrDto2;
-import com.example.monitoringNss.domain.dto.model.VlrSummaryDto;
 import com.example.monitoringNss.domain.model.entity.VlrSummary;
-import com.example.monitoringNss.domain.model.entity.VlrSummaryKPI;
-import com.example.monitoringNss.domain.model.request.CreateVlrSummaryRequest;
-import com.example.monitoringNss.service.VlrSummaryKPIService;
+import com.example.monitoringNss.domain.model.entity.VlrSummaryKpi;
+import com.example.monitoringNss.domain.model.request.VlrSummaryRequest;
+import com.example.monitoringNss.service.VlrSummaryKpiService;
 import com.example.monitoringNss.service.VlrSummaryService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -27,32 +25,24 @@ public class VlrSummaryController {
     @NonNull
     VlrSummaryService vlrSummaryService;
     @NonNull
-    VlrSummaryKPIService vlrSummaryKPIService;
+    VlrSummaryKpiService vlrSummaryKpiService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody @Validated CreateVlrSummaryRequest createVlrSummaryRequest){
+    public ResponseEntity<?> create(@RequestBody @Validated VlrSummaryRequest createVlrSummaryRequest){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(vlrSummaryService.create(createVlrSummaryRequest));
     }
 
     @PostMapping("/saveToVlr")
-    public ResponseEntity<?> saveToVlr(@RequestBody @Validated List<VlrSummary> createVlrSummaryRequest){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
+    public ResponseEntity<?> saveToVlr(@RequestBody @Validated List<VlrSummaryRequest> createVlrSummaryRequest){
+        return ResponseEntity.status(HttpStatus.CREATED)
                 .body(vlrSummaryService.saveData(createVlrSummaryRequest));
     }
 
-    @PutMapping("/avgDate/{date}")
-    public ResponseEntity<?> avgDate(@PathVariable String date){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(vlrSummaryKPIService.avgDay(date));
-    }
-
     @PutMapping("/avgDateAll")
-    public List<VlrSummaryKPI> avgDateAll(){
-        return vlrSummaryKPIService.avgDayAll();
+    public List<VlrSummaryKpi> avgDateAll(){
+        return vlrSummaryKpiService.avgDayAll();
     }
 
 }

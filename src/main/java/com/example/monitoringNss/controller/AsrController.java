@@ -1,9 +1,8 @@
 package com.example.monitoringNss.controller;
 
 import com.example.monitoringNss.domain.dto.model.AsrDto;
-import com.example.monitoringNss.domain.dto.model.AsrDto2;
 import com.example.monitoringNss.domain.model.entity.Asr;
-import com.example.monitoringNss.domain.model.request.CreateAsrRequest;
+import com.example.monitoringNss.domain.model.request.AsrRequest;
 import com.example.monitoringNss.service.AsrService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +24,10 @@ public class AsrController {
     @NonNull AsrService asrService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody @Validated CreateAsrRequest createAsrRequest){
+    public ResponseEntity<?> create(@RequestBody @Validated AsrRequest asrRequest){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(asrService.create(createAsrRequest));
+                .body(asrService.create(asrRequest));
     }
     @GetMapping("/getAll")
     public List<Asr> getAll(){
@@ -69,13 +68,13 @@ public class AsrController {
     }
 
     @GetMapping("/getAllnewKPI")
-    public List<AsrDto2> getAllnewKPI(){
+    public List<AsrDto> getAllnewKPI(){
 
         return asrService.getAllnewKPI();
     }
 
     @GetMapping("/getAllnewKPI2")
-    public List<AsrDto2> getAllnewKPI2(){
+    public List<AsrDto> getAllnewKPI2(){
 
         return asrService.getAllnewKPI2();
     }

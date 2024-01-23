@@ -25,10 +25,13 @@ public class Asr extends BaseEntity{
     @Column(nullable = false)
     Long localSubscribers;
 
+    @Column(nullable = false, length =50)
     Long roamingSubscribers;
 
+    @Column(nullable = false, length =50)
     String rnc;
 
+    @Column(nullable = false, length =50)
     String region;
 
 }

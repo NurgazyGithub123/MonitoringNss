@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -17,7 +15,7 @@ import java.time.LocalTime;
 @Table(name = "tb_vlrsummaryKpi")
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class VlrSummaryKPI extends BaseEntity{
+public class VlrSummaryKpi extends BaseEntity{
 
     String msxName;
 
@@ -33,7 +31,7 @@ public class VlrSummaryKPI extends BaseEntity{
     Long postpaid;
 
     Long vlr4g;
-
+    @Column(nullable = false, unique = true)
     LocalDate date;
 
     String month;

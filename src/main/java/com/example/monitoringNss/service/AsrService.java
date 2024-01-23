@@ -1,9 +1,8 @@
 package com.example.monitoringNss.service;
 
 import com.example.monitoringNss.domain.dto.model.AsrDto;
-import com.example.monitoringNss.domain.dto.model.AsrDto2;
 import com.example.monitoringNss.domain.model.entity.Asr;
-import com.example.monitoringNss.domain.model.request.CreateAsrRequest;
+import com.example.monitoringNss.domain.model.request.AsrRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 @Service
 public interface AsrService {
 
-        Asr create(CreateAsrRequest request);
+        Asr create(AsrRequest asrRequest);
 
         Asr getById(Long id);
 
@@ -26,7 +25,7 @@ public interface AsrService {
 
         Asr updateByID(Long id, Asr asr);
 
-        List<AsrDto2> getAllnewKPI();
+        List<AsrDto> getAllnewKPI();
 
-        List<AsrDto2> getAllnewKPI2();
+        List<AsrDto> getAllnewKPI2();
 }

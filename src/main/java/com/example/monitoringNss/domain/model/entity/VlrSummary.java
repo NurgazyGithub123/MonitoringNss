@@ -19,8 +19,10 @@ import java.time.LocalTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class VlrSummary extends BaseEntity{
 
+
     LocalDateTime startTime;
 
+    @Column(name = "msx_name", nullable = false, length = 50)
     String msxName;
 
     Long vlrLocal;
@@ -31,7 +33,6 @@ public class VlrSummary extends BaseEntity{
 
     Long total;
 
-    @Column(name = "bitel", nullable = false)
     Long bitel;
 
     Long vlrSGs;
@@ -39,9 +40,10 @@ public class VlrSummary extends BaseEntity{
     LocalDate date;
 
     LocalTime time;
-
+    @Column(length = 10)
     String year;
 
+    @Column(length = 10)
     String week;
 
 }

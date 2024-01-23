@@ -1,9 +1,8 @@
 package com.example.monitoringNss.service.impl;
 
 import com.example.monitoringNss.domain.dto.model.AsrDto;
-import com.example.monitoringNss.domain.dto.model.AsrDto2;
 import com.example.monitoringNss.domain.model.entity.Asr;
-import com.example.monitoringNss.domain.model.request.CreateAsrRequest;
+import com.example.monitoringNss.domain.model.request.AsrRequest;
 import com.example.monitoringNss.domain.repository.AsrRepo;
 import com.example.monitoringNss.service.AsrService;
 import lombok.AccessLevel;
@@ -25,12 +24,12 @@ public class AsrServiceImpl implements AsrService {
 
 
 
-    public Asr create(CreateAsrRequest request){
+    public Asr create(AsrRequest asrRequest){
         Asr asr = new Asr();
-        asr.setNeName(request.getNeName());
-        asr.setStartTime(request.getStartTime());
-        asr.setLocalSubscribers(request.getLocalSubscribers());
-        asr.setRoamingSubscribers(request.getRoamingSubscribers());
+        asr.setNeName(asrRequest.getNeName());
+        asr.setStartTime(asrRequest.getStartTime());
+        asr.setLocalSubscribers(asrRequest.getLocalSubscribers());
+        asr.setRoamingSubscribers(asrRequest.getRoamingSubscribers());
 
         return asrRepo.save(asr);
     }
@@ -87,16 +86,16 @@ public class AsrServiceImpl implements AsrService {
     }
 
     @Override
-    public List<AsrDto2> getAllnewKPI() {
+    public List<AsrDto> getAllnewKPI() {
          return asrRepo.getAllnewKPI();
     }
 
         @Override
-    public List<AsrDto2> getAllnewKPI2() {
-        List<AsrDto2> asrs = asrRepo.getAllnewKPI2();
-        List<AsrDto2> savedAsr = new ArrayList<>();
+    public List<AsrDto> getAllnewKPI2() {
+        List<AsrDto> asrs = asrRepo.getAllnewKPI2();
+        List<AsrDto> savedAsr = new ArrayList<>();
 
-            for (AsrDto2 asr: asrs) {
+            for (AsrDto asr: asrs) {
                 Asr asr1 = new Asr();
                 asr1.setId(asr.getId());
                 asr1.setStartTime(asr.getStartTime());
@@ -110,8 +109,8 @@ public class AsrServiceImpl implements AsrService {
             return savedAsr;
     }
 
-    private AsrDto2 castToAsr(Asr asr){
-                return new AsrDto2() {
+    private AsrDto castToAsr(Asr asr){
+                return new AsrDto() {
                     @Override
             public Long getId() {
                 return asr.getId();
