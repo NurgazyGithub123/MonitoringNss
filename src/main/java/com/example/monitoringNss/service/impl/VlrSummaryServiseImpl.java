@@ -78,48 +78,4 @@ public class VlrSummaryServiseImpl implements VlrSummaryService {
 
     }
 
-    private VlrSummaryDto castToVlr(VlrSummary savedVlrSummary) {
-        return new VlrSummaryDto() {
-            @Override
-            public LocalDateTime getStartTime() {
-                return savedVlrSummary.getStartTime();
-            }
-
-            @Override
-            public String getMsxName() {
-                return savedVlrSummary.getMsxName();
-            }
-
-            @Override
-            public Long getvlrLocal() {
-                return savedVlrSummary.getVlrLocal();
-            }
-
-            @Override
-            public Long getvlrRoaming() {
-                return savedVlrSummary.getVlrRoaming();
-            }
-
-            @Override
-            public Long getVlrCamel() {
-                return savedVlrSummary.getVlrCamel();
-            }
-
-            @Override
-            public Long getTotal() {
-                return savedVlrSummary.getTotal();
-            }
-
-            @Override
-            public Long getBitel() {
-                return savedVlrSummary.getBitel();
-            }
-
-            @Override
-            public Long getVlrSGs() {
-                return savedVlrSummary.getVlrSGs();
-            }
-        };
-    }
-
 }

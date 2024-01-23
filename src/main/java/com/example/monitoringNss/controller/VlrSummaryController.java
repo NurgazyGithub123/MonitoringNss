@@ -51,7 +51,7 @@ public class VlrSummaryController {
     }
 
     @PutMapping("/avgDateAll")
-    public List<VlrSummaryDto> avgDateAll(){
+    public List<VlrSummaryKPI> avgDateAll(){
         return vlrSummaryKPIService.avgDayAll();
     }
 

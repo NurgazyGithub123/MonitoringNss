@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 
 public interface VlrSummaryDto {
 
-    LocalDateTime getStartTime();
-
     String getMsxName();
 
     Long getvlrLocal();

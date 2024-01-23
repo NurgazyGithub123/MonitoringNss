@@ -31,7 +31,7 @@ public class VlrSummaryKPIServiceImpl implements VlrSummaryKPIService {
         vlrSummaryKPI.setDate(LocalDate.parse(date));
         vlrSummaryKPI.setYear(String.valueOf(LocalDate.parse(date).getYear()));
         vlrSummaryKPI.setMonth(String.valueOf(LocalDate.parse(date).getMonth()));
-        vlrSummaryKPI.setVlr4g(vlrSummary.getVlrSGs());
+        vlrSummaryKPI.setVlr4g( vlrSummary.getVlrSGs());
         vlrSummaryKPI.setPrepaid(vlrSummary.getvlrLocal());
         vlrSummaryKPI.setTotal(vlrSummary.getTotal());
         vlrSummaryKPI.setPostpaid(vlrSummary.getBitel());
@@ -47,23 +47,30 @@ public class VlrSummaryKPIServiceImpl implements VlrSummaryKPIService {
     }
 
     @Override
-    public List<VlrSummaryDto> avgDayAll() {
+    public List<VlrSummaryKPI> avgDayAll() {
 
-        List<VlrSummaryDto> vlrSummaryDtoList  = vlrSummaryRepo.avgDayAll();
-        List<VlrSummaryDto> savedVlr = new ArrayList<>();
+        List<VlrSummaryDto> vlrSummaryList  = vlrSummaryRepo.avgDayAll();
+        List<VlrSummaryKPI> savedVlr = new ArrayList<>();
 
-        for (VlrSummaryDto vlrSummary : vlrSummaryDtoList) {
+        for (VlrSummaryDto vlrSummary : vlrSummaryList) {
 
-//            VlrSummaryKPI vlrSummaryKPI = new VlrSummaryKPI();
-//            vlrSummaryKPI.setDate(vlrSummary.getDate());
-//            vlrSummaryKPI.setVlr4g();
-//            vlrSummaryKPI.setPrepaid();
-//            vlrSummaryKPI.setTotal();
-//            vlrSummaryKPI.setPostpaid();
-//            vlrSummaryKPI.setCamel();
-//            vlrSummaryKPI.setRoaming();
+            VlrSummaryKPI vlrSummaryKPI = new VlrSummaryKPI();
+
+
+            vlrSummaryKPI.setDate(vlrSummary.getDate());
+            vlrSummaryKPI.setVlr4g(vlrSummary.getVlrSGs());
+            vlrSummaryKPI.setPrepaid(vlrSummary.getBitel());
+            vlrSummaryKPI.setTotal(vlrSummary.getTotal());
+            vlrSummaryKPI.setPostpaid(vlrSummary.getBitel());
+            vlrSummaryKPI.setCamel(vlrSummary.getVlrCamel());
+            vlrSummaryKPI.setRoaming(vlrSummary.getvlrRoaming());
+            vlrSummaryKPI.setMsxName("network");
+
+            savedVlr.add( vlrSummaryKPI);
         }
-
-        return null;
+        return  vlrSummaryKpiRepo.save(savedVlr);
     }
+
+
+
 }

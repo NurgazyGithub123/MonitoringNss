@@ -11,5 +11,5 @@ public interface VlrSummaryKPIService {
 
     VlrSummaryKPI avgDay(String date);
 
-    List<VlrSummaryDto> avgDayAll();
+    List<VlrSummaryKPI> avgDayAll();
 }
