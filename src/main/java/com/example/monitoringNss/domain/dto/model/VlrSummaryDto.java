@@ -1,6 +1,7 @@
 package com.example.monitoringNss.domain.dto.model;
 
 import javax.persistence.Column;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface VlrSummaryDto {
@@ -20,4 +21,6 @@ public interface VlrSummaryDto {
     Long getBitel();
 
     Long getVlrSGs();
+
+    LocalDate getDate();
 }

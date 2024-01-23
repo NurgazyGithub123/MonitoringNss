@@ -3,6 +3,7 @@ package com.example.monitoringNss.controller;
 import com.example.monitoringNss.domain.dto.model.AsrDto2;
 import com.example.monitoringNss.domain.dto.model.VlrSummaryDto;
 import com.example.monitoringNss.domain.model.entity.VlrSummary;
+import com.example.monitoringNss.domain.model.entity.VlrSummaryKPI;
 import com.example.monitoringNss.domain.model.request.CreateVlrSummaryRequest;
 import com.example.monitoringNss.service.VlrSummaryKPIService;
 import com.example.monitoringNss.service.VlrSummaryService;
@@ -47,6 +48,11 @@ public class VlrSummaryController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(vlrSummaryKPIService.avgDay(date));
+    }
+
+    @PutMapping("/avgDateAll")
+    public List<VlrSummaryDto> avgDateAll(){
+        return vlrSummaryKPIService.avgDayAll();
     }
 
 }

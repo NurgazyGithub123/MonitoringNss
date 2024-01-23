@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,23 +77,6 @@ public class VlrSummaryServiseImpl implements VlrSummaryService {
         return list1;
 
     }
-
-////    public VlrSummary avgDay(String date){
-//
-////        VlrSummaryDto vlrSummary = (VlrSummaryDto) vlrSummaryRepo.avgDay(LocalDate.parse(date));
-////        VlrSummaryKPI vlrSummaryKPI = new VlrSummaryKPI();
-////        vlrSummaryKPI.setDate(LocalDate.parse(date));
-////        vlrSummaryKPI.setYear(String.valueOf(LocalDate.parse(date).getYear()));
-////        vlrSummaryKPI.setMonth(String.valueOf(LocalDate.parse(date).getMonth()));
-////        vlrSummaryKPI.setVlr4g(vlrSummary.getVlrSGs());
-////        vlrSummaryKPI.setPrepaid(vlrSummary.getVlrCamel());
-////        vlrSummaryKPI.setTotal(vlrSummary.getTotal());
-////        vlrSummaryKPI.setPostpaid(vlrSummary.getVlrLocal());
-////        vlrSummaryKPI.setCamel(vlrSummaryKPI.getCamel());
-//        System.out.println(vlrSummary);
-//        return null;
-//        //return vlrSummaryKpiRepo.save(vlrSummaryKPI);
-//    }
 
     private VlrSummaryDto castToVlr(VlrSummary savedVlrSummary) {
         return new VlrSummaryDto() {
