@@ -4,7 +4,9 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -16,22 +18,46 @@ import java.time.LocalDateTime;
 public class Asr extends BaseEntity{
 
 
-    @Column(nullable = false)
+    String objectInstance;
+
     LocalDateTime startTime;
 
-    @Column(nullable = false, length =50)
-    String neName;
+    LocalDate date;
 
-    @Column(nullable = false)
-    Long localSubscribers;
+    LocalTime time;
 
-    @Column(nullable = false, length =50)
-    Long roamingSubscribers;
+    int callAttemptTimes;
 
-    @Column(nullable = false, length =50)
-    String rnc;
+    int answerTimes;
 
-    @Column(nullable = false, length =50)
-    String region;
+    Double answerRatio;
+
+    int abandonBeforeRingTimes;
+
+    int abandonAfterRingTimes;
+
+    int ringedNoAnswerTimes;
+
+    int userDeterminatedBusyTimes;
+
+    int userBusyTimes;
+
+    int invalidAddressTimes;
+
+    int pagingNoResponseTimes;
+
+    int absentSubscriberTimes;
+
+    int subscriberServiceRestrictedTimes;
+
+    int specialSignalTonePlayedTimes;
+
+    int theCalledNoRespond;
+
+    Double asr;
+
+    Double ner;
+
+    Integer sucAttempt;
 
 }

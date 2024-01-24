@@ -10,22 +10,8 @@ import java.util.List;
 @Service
 public interface AsrService {
 
-        Asr create(AsrRequest asrRequest);
 
-        Asr getById(Long id);
+    List<Asr> create(List<AsrRequest> asrRequest);
 
-        List<Asr> getAll();
-
-
-        List<AsrDto> getAllByNeNameAndStartTime();
-
-        List<Asr> getAllbyRegion(String region);
-
-        List<Asr> getAllisEmpty(String region);
-
-        Asr updateByID(Long id, Asr asr);
-
-        List<AsrDto> getAllnewKPI();
-
-        List<AsrDto> getAllnewKPI2();
+    List<Asr> updateAll();
 }

@@ -5,22 +5,44 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AsrRequest {
 
+    String objectInstance;
+
     LocalDateTime startTime;
 
-    String neName;
+    int callAttemptTimes;
 
-    String rnc;
+    int answerTimes;
 
-    String region;
+    Double answerRatio;
 
-    Long localSubscribers;
+    int abandonBeforeRingTimes;
 
-    Long roamingSubscribers;
+    int abandonAfterRingTimes;
+
+    int ringedNoAnswerTimes;
+
+    int userDeterminatedBusyTimes;
+
+    int UserBusyTimes;
+
+    int invalidAddressTimes;
+
+    int pagingNoResponseTimes;
+
+    int absentSubscriberTimes;
+
+    int subscriberServiceRestrictedTimes;
+
+    int specialSignalTonePlayedTimes;
+
+    int theCalledNoRespond;
 }

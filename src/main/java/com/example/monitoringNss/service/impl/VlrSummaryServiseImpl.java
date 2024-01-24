@@ -46,9 +46,7 @@ public class VlrSummaryServiseImpl implements VlrSummaryService {
 
     public List<VlrSummary> saveData(List<VlrSummaryRequest> createVlrSummaryRequest){
 
-        System.out.println(createVlrSummaryRequest);
         List<VlrSummary> list = new ArrayList<>();
-
 
         for (VlrSummaryRequest vlrSummary: createVlrSummaryRequest) {
             VlrSummary savedVlrSummary = new VlrSummary();

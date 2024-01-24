@@ -1,20 +1,49 @@
 package com.example.monitoringNss.domain.dto.model;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 public interface AsrDto {
 
-
     Long getId();
+
+    String getObjectInstance();
 
     LocalDateTime getStartTime();
 
-    String getNeName();
+    LocalDate getDate();
 
-    String getRegion();
+    LocalTime getTime();
 
-    Long getLocalSubscribers();
+    int getCallAttemptTimes();
+
+    int getAnswerTimes();
+
+    Double getAnswerRatio();
+
+    int getAbandonBeforeRingTimes();
+
+    int getAbandonAfterRingTimes();
+
+    int getRingedNoAnswerTimes();
+
+    int getUserDeterminatedBusyTimes();
+
+    int getUserBusyTimes();
+
+    int getInvalidAddressTimes();
+
+    int getPagingNoResponseTimes();
+
+    int getAbsentSubscriberTimes();
+
+    int getSubscriberServiceRestrictedTimes();
+
+    int getSpecialSignalTonePlayedTimes();
+
+    int getTheCalledNoRespond();
 
 }
