@@ -2,7 +2,9 @@ package com.example.monitoringNss.service.impl;
 
 import com.example.monitoringNss.domain.dto.model.AsrDto;
 import com.example.monitoringNss.domain.model.entity.Asr;
+import com.example.monitoringNss.domain.model.entity.AsrKpi;
 import com.example.monitoringNss.domain.model.request.AsrRequest;
+import com.example.monitoringNss.domain.repository.AsrKpiRepo;
 import com.example.monitoringNss.domain.repository.AsrRepo;
 import com.example.monitoringNss.service.AsrService;
 import lombok.AccessLevel;
@@ -11,9 +13,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Service
@@ -115,4 +115,5 @@ public class AsrServiceImpl implements AsrService {
         }
         return savedAsr;
     }
+
 }

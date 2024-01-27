@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @ToString
-@Table(name = "tb_vlrsummaryKpi")
+@Table(name = "tb_vlrsummary_kpi")
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class VlrSummaryKpi extends BaseEntity{

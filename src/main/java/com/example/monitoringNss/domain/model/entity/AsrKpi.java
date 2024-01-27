@@ -14,18 +14,18 @@ import java.time.LocalTime;
 @Setter
 @Entity
 @ToString
-@Table(name = "tb_asr")
+@Table(name = "tb_asr_kpi")
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AsrKpi extends BaseEntity{
 
     String objectInstance;
 
-    LocalDateTime startTime;
-
     LocalDate date;
 
-    LocalTime time;
+    int callAttemptTimes;
+
+    int answerTimes;
 
     Double sucAttempt;
 
