@@ -2,16 +2,16 @@ package com.example.monitoringNss.service.impl;
 
 import com.example.monitoringNss.domain.dto.model.AsrDto;
 import com.example.monitoringNss.domain.dto.model.AsrKpiDto;
-import com.example.monitoringNss.domain.model.entity.Asr;
 import com.example.monitoringNss.domain.model.entity.AsrKpi;
 import com.example.monitoringNss.domain.repository.AsrKpiRepo;
-import com.example.monitoringNss.domain.repository.AsrRepo;
+import com.example.monitoringNss.exception.EntityNotFoundException;
 import com.example.monitoringNss.service.AsrKpiService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,6 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AsrKpiServiceImpl implements AsrKpiService {
 
-    private final AsrRepo asrRepo;
     private final AsrKpiRepo asrKpiRepo;
 
     @Override
@@ -41,12 +40,26 @@ public class AsrKpiServiceImpl implements AsrKpiService {
             asr.setNer(asrKpi.getCallAttemptTimes() > 0 ? asrKpi.getSucAttempt()
                     / asrKpi.getCallAttemptTimes()*100 : asrKpi.getCallAttemptTimes());
 
-            asrKpiRepo.save(asr);
-            count++;
-            if (count < 10){
-                savedAsrKpi.add(asr);
-            }
+
+            savedAsrKpi.add(asr);
+            asrKpiRepo.saveAll(savedAsrKpi);
+
         }
         return savedAsrKpi;
+    }
+
+    @Override
+    public List<AsrKpiDto> asrFindByDate(String date) {
+
+        return asrKpiRepo.findBiDate(LocalDate.parse(date));
+
+    }
+
+    @Override
+    public AsrKpi asrFindByID(Long id) {
+        return asrKpiRepo
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Asr with id = " + id + "not found"));
+
     }
 }

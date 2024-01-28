@@ -13,7 +13,7 @@ import javax.persistence.*;
 public abstract class BaseEntity {
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, columnDefinition = "TIMESTAMP ")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 

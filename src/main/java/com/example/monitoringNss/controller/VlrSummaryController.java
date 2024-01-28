@@ -34,9 +34,9 @@ public class VlrSummaryController {
     }
 
     @PostMapping("/saveToVlr")
-    public ResponseEntity<?> saveToVlr(@RequestBody @Validated List<VlrSummaryRequest> createVlrSummaryRequest){
+    public ResponseEntity<?> saveAllToVlr(@RequestBody @Validated List<VlrSummaryRequest> createVlrSummaryRequest){
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(vlrSummaryService.saveData(createVlrSummaryRequest));
+                .body(vlrSummaryService.saveAll(createVlrSummaryRequest));
     }
 
     @PutMapping("/avgDateAll")

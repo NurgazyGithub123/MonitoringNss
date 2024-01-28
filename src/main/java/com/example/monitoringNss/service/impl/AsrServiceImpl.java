@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,10 +59,9 @@ public class AsrServiceImpl implements AsrService {
             System.out.println((double) asrList.getAnswerTimes()/ asrList.getCallAttemptTimes());
             asr.setAsr((asrList.getCallAttemptTimes() > 0) ? (double)asrList.getAnswerTimes()/ asrList.getCallAttemptTimes() : (double) asrList.getCallAttemptTimes());
 
-            asrRepo.save(asr);
             savedAsr.add(asr);
         }
-        return savedAsr;
+        return asrRepo.saveAll(savedAsr);
     }
 
     public List<Asr> updateAll(){
@@ -106,14 +106,9 @@ public class AsrServiceImpl implements AsrService {
             asr.setAsr((asrList.get(i).getCallAttemptTimes() > 0) ? (double) asrList.get(i).getAnswerTimes()
                     / asrList.get(i).getCallAttemptTimes() : (double) asrList.get(i).getCallAttemptTimes());
 
-            System.out.println(i);
-
-            asrRepo.save(asr);
-            if(i < 10){
-                savedAsr.add(asr);
-            }
+            savedAsr.add(asr);
         }
-        return savedAsr;
+        return asrRepo.saveAll(savedAsr);
     }
 
 }

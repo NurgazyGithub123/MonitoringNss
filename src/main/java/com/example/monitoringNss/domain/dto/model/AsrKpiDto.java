@@ -6,17 +6,10 @@ import java.time.LocalTime;
 
 public interface AsrKpiDto {
 
-    Long getId();
-
     String getObjectInstance();
-
-    LocalDateTime getStartTime();
 
     LocalDate getDate();
 
-    LocalTime getTime();
-
-    Double getSucAttempt();
 
     Double getAsr();
 

@@ -11,6 +11,6 @@ public interface VlrSummaryService {
 
     VlrSummary create(VlrSummaryRequest createVlrSummaryRequest);
 
-    List<VlrSummary> saveData(List<VlrSummaryRequest> createVlrSummaryRequest);
+    List<VlrSummary> saveAll(List<VlrSummaryRequest> createVlrSummaryRequest);
 
 }
