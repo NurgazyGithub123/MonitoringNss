@@ -13,6 +13,7 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Entity
+
 @ToString
 @Table(name = "tb_asr_kpi")
 @NoArgsConstructor

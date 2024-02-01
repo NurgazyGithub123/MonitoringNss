@@ -60,4 +60,6 @@ public class Asr extends BaseEntity{
 
     Integer sucAttempt;
 
+
+
 }

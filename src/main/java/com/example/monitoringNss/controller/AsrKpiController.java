@@ -20,11 +20,11 @@ public class AsrKpiController {
     @NonNull
     AsrKpiService asrKpiService;
 
-    @GetMapping("/asrFindAll")
-    public ResponseEntity<?> asrFindAll(){
+    @GetMapping("/asrSaveAlltoAsrKPI")
+    public ResponseEntity<?> asrSaveAlltoAsrKPI(){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(asrKpiService.asrFindAll());
+                .body(asrKpiService.asrSaveAlltoAsrKPI());
 
     }
 
@@ -41,4 +41,12 @@ public class AsrKpiController {
                     .status(HttpStatus.OK)
                     .body(asrKpiService.asrFindByID(id));
     }
+
+    @GetMapping("/asrFindByObjectInstance/{objectInstance}")
+    public ResponseEntity<?> asrFindByObjectInstance(@PathVariable String objectInstance){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(asrKpiService.asrFindByObjectInstance(objectInstance));
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.example.monitoringNss.controller;
 
 import com.example.monitoringNss.domain.model.entity.VlrSummaryKpi;
-import com.example.monitoringNss.domain.model.request.VlrSummaryRequest;
+import com.example.monitoringNss.domain.model.dto.request.VlrSummaryRequest;
 import com.example.monitoringNss.service.VlrSummaryKpiService;
 import com.example.monitoringNss.service.VlrSummaryService;
 import lombok.AccessLevel;

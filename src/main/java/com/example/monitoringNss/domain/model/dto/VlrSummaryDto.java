@@ -1,11 +1,10 @@
-package com.example.monitoringNss.domain.dto.model;
+package com.example.monitoringNss.domain.model.dto;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public interface VlrSummaryDto {
 
+    Long getId();
     String getMsxName();
 
     Long getVlrLocal();

@@ -1,13 +1,9 @@
 package com.example.monitoringNss.service;
 
-import com.example.monitoringNss.domain.dto.model.AsrDto;
 import com.example.monitoringNss.domain.model.entity.Asr;
-import com.example.monitoringNss.domain.model.entity.AsrKpi;
-import com.example.monitoringNss.domain.model.request.AsrRequest;
+import com.example.monitoringNss.domain.model.dto.request.AsrRequest;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service

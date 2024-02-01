@@ -1,10 +1,9 @@
-package com.example.monitoringNss.domain.dto.model;
+package com.example.monitoringNss.domain.model.dto;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 
 public interface VlrSummaryKpiDto {
-
+    Long getId();
     String getMsxName();
 
     Long getPrepaid();

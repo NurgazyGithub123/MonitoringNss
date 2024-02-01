@@ -25,7 +25,6 @@ final public class DateFormatToLocal {
         int weekNumber = date.get(weekFields.weekOfWeekBasedYear());
 
         return weekNumber + "";
-
     }
 
 

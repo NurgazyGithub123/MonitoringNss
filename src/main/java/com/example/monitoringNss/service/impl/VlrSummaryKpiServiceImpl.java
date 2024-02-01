@@ -1,7 +1,7 @@
 package com.example.monitoringNss.service.impl;
 
-import com.example.monitoringNss.domain.dto.model.VlrSummaryDto;
-import com.example.monitoringNss.domain.dto.model.VlrSummaryKpiDto;
+import com.example.monitoringNss.domain.model.dto.VlrSummaryDto;
+import com.example.monitoringNss.domain.model.dto.VlrSummaryKpiDto;
 import com.example.monitoringNss.domain.model.entity.VlrSummaryKpi;
 import com.example.monitoringNss.domain.repository.VlrSummaryKpiRepo;
 import com.example.monitoringNss.domain.repository.VlrSummaryRepo;
@@ -28,7 +28,7 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
         VlrSummaryKpiDto vlrSummary = vlrSummaryKpiRepo.avgDay(LocalDate.parse(date));
         VlrSummaryKpi vlrSummaryKpi = new VlrSummaryKpi();
 
-        vlrSummaryKpi.setDate(LocalDate.parse(date));
+        vlrSummaryKpi.setDate(vlrSummary.getDate());
         vlrSummaryKpi.setYear(vlrSummary.getYear());
         vlrSummaryKpi.setMonth(vlrSummary.getMonth());
         vlrSummaryKpi.setMsxName(vlrSummary.getMsxName());
@@ -39,10 +39,7 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
         vlrSummaryKpi.setCamel(vlrSummary.getCamel());
         vlrSummaryKpi.setRoaming(vlrSummary.getRoaming());
 
-
-        System.out.println(vlrSummary.getMsxName());
         return vlrSummaryKpi;
-
     }
 
     @Override

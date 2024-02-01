@@ -1,9 +1,6 @@
 package com.example.monitoringNss.controller;
 
-import com.example.monitoringNss.config.DateFormatToLocal;
-import com.example.monitoringNss.domain.dto.model.AsrDto;
-import com.example.monitoringNss.domain.model.entity.Asr;
-import com.example.monitoringNss.domain.model.request.AsrRequest;
+import com.example.monitoringNss.domain.model.dto.request.AsrRequest;
 import com.example.monitoringNss.service.AsrService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

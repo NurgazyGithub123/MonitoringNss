@@ -1,7 +1,7 @@
 package com.example.monitoringNss.service.impl;
 
-import com.example.monitoringNss.domain.dto.model.AsrDto;
-import com.example.monitoringNss.domain.dto.model.AsrKpiDto;
+import com.example.monitoringNss.domain.model.dto.AsrDto;
+import com.example.monitoringNss.domain.model.dto.AsrKpiDto;
 import com.example.monitoringNss.domain.model.entity.AsrKpi;
 import com.example.monitoringNss.domain.repository.AsrKpiRepo;
 import com.example.monitoringNss.exception.EntityNotFoundException;
@@ -23,7 +23,7 @@ public class AsrKpiServiceImpl implements AsrKpiService {
     private final AsrKpiRepo asrKpiRepo;
 
     @Override
-    public List<AsrKpi> asrFindAll() {
+    public List<AsrKpi> asrSaveAlltoAsrKPI() {
 
         List<AsrDto> asrFindAllDay = asrKpiRepo.findAllByDay();
         List<AsrKpi> savedAsrKpi = new ArrayList<>();
@@ -40,19 +40,17 @@ public class AsrKpiServiceImpl implements AsrKpiService {
             asr.setNer(asrKpi.getCallAttemptTimes() > 0 ? asrKpi.getSucAttempt()
                     / asrKpi.getCallAttemptTimes()*100 : asrKpi.getCallAttemptTimes());
 
-
             savedAsrKpi.add(asr);
-            asrKpiRepo.saveAll(savedAsrKpi);
-
         }
-        return savedAsrKpi;
+        return asrKpiRepo.saveAll(savedAsrKpi);
     }
 
     @Override
     public List<AsrKpiDto> asrFindByDate(String date) {
+        List<AsrKpiDto> asrKpiDto = asrKpiRepo.findBiDate(LocalDate.parse(date));
+        System.out.println(asrKpiDto);
 
-        return asrKpiRepo.findBiDate(LocalDate.parse(date));
-
+        return asrKpiDto;
     }
 
     @Override
@@ -61,5 +59,10 @@ public class AsrKpiServiceImpl implements AsrKpiService {
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Asr with id = " + id + "not found"));
 
+    }
+
+    @Override
+    public List<AsrKpiDto> asrFindByObjectInstance(String objectInstance) {
+        return asrKpiRepo.findAsrKpiByObjectInstance(objectInstance);
     }
 }

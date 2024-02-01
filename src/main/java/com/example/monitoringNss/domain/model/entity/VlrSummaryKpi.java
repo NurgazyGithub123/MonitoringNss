@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class VlrSummaryKpi extends BaseEntity{
 
+    @Column(name = "msx_name")
     String msxName;
 
     Long prepaid;

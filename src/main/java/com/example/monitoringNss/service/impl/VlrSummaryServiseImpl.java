@@ -1,9 +1,8 @@
 package com.example.monitoringNss.service.impl;
 
 import com.example.monitoringNss.config.DateFormatToLocal;
-import com.example.monitoringNss.domain.dto.model.VlrSummaryDto;
 import com.example.monitoringNss.domain.model.entity.VlrSummary;
-import com.example.monitoringNss.domain.model.request.VlrSummaryRequest;
+import com.example.monitoringNss.domain.model.dto.request.VlrSummaryRequest;
 import com.example.monitoringNss.domain.repository.VlrSummaryRepo;
 import com.example.monitoringNss.service.VlrSummaryService;
 import lombok.AccessLevel;
@@ -11,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

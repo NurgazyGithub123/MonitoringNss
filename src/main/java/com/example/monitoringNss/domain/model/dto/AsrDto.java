@@ -1,11 +1,9 @@
-package com.example.monitoringNss.domain.dto.model;
+package com.example.monitoringNss.domain.model.dto;
 
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
-
 public interface AsrDto {
 
     Long getId();
@@ -47,5 +45,6 @@ public interface AsrDto {
     int getTheCalledNoRespond();
 
     Double getSucAttempt();
+
 
 }

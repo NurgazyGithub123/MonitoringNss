@@ -1,11 +1,9 @@
-package com.example.monitoringNss.domain.model.request;
+package com.example.monitoringNss.domain.model.dto.request;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
