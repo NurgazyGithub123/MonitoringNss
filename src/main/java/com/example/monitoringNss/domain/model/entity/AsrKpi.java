@@ -13,10 +13,11 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Entity
-
+@Builder
 @ToString
 @Table(name = "tb_asr_kpi")
 @NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AsrKpi extends BaseEntity{
 
@@ -28,7 +29,7 @@ public class AsrKpi extends BaseEntity{
 
     int answerTimes;
 
-    Double sucAttempt;
+    Integer sucAttempt;
 
     Double asr;
 

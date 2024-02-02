@@ -1,18 +1,29 @@
 package com.example.monitoringNss.domain.model.dto;
 
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
 import java.time.LocalDate;
 
-public interface AsrKpiDto {
+@Data
+@Builder
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public class AsrKpiDto {
 
-    Long getId();
-    String getObjectInstance();
-    LocalDate getDate();
-    Double getAsr();
-    Double getNer();
-    int getCallAttemptTimes();
-    public int getAnswerTimes();
-    Double getSucAttempt();
+    Long id;
 
+    String objectInstance;
 
+    LocalDate date;
 
+    int callAttemptTimes;
+
+    int answerTimes;
+
+    Integer sucAttempt;
+
+    Double asr;
+
+    Double ner;
 }

@@ -1,6 +1,6 @@
 package com.example.monitoringNss.controller;
 
-import com.example.monitoringNss.domain.model.dto.request.AsrRequest;
+import com.example.monitoringNss.domain.model.request.CreateAsrRequest;
 import com.example.monitoringNss.service.AsrService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +22,9 @@ public class AsrController {
         @NonNull AsrService asrService;
 
         @PostMapping("/create")
-        public ResponseEntity<?> create(@RequestBody @Validated List<AsrRequest> asrRequest){
+        public ResponseEntity<?> create(@RequestBody @Validated List<CreateAsrRequest> createAsrRequest){
                 return ResponseEntity.status(HttpStatus.CREATED)
-                        .body(asrService.create(asrRequest));
+                        .body(asrService.create(createAsrRequest));
         }
 
         @PutMapping("/update")

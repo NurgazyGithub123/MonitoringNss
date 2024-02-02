@@ -12,11 +12,12 @@ import java.time.LocalTime;
 @Setter
 @Entity
 @ToString
+@Builder
 @Table(name = "tb_asr")
 @NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Asr extends BaseEntity{
-
 
     String objectInstance;
 

@@ -1,4 +1,4 @@
-package com.example.monitoringNss.domain.model.dto.request;
+package com.example.monitoringNss.domain.model.request;
 
 import lombok.AccessLevel;
 import lombok.Data;

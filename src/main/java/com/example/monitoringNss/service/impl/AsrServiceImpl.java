@@ -1,10 +1,14 @@
 package com.example.monitoringNss.service.impl;
 
+import com.example.monitoringNss.domain.model.dto.AsrDto;
 import com.example.monitoringNss.domain.model.entity.Asr;
-import com.example.monitoringNss.domain.model.dto.request.AsrRequest;
+import com.example.monitoringNss.domain.model.mapper.AsrMapper;
+import com.example.monitoringNss.domain.model.mapper.CreateAsrMapper;
+import com.example.monitoringNss.domain.model.request.CreateAsrRequest;
 import com.example.monitoringNss.domain.repository.AsrRepo;
 import com.example.monitoringNss.service.AsrService;
 import lombok.AccessLevel;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
@@ -18,47 +22,19 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AsrServiceImpl implements AsrService {
 
-    private final AsrRepo asrRepo;
+    @NonNull AsrRepo asrRepo;
     @Override
-    public List<Asr> create(List<AsrRequest> asrRequest) {
+    public List<AsrDto> create(List<CreateAsrRequest> createAsrRequest) {
 
-        List<Asr> savedAsr = new ArrayList<>();
-
-        for(AsrRequest asrList : asrRequest){
-            Asr asr = new Asr();
-            asr.setStartTime(asrList.getStartTime());
-            asr.setDate(asrList.getStartTime().toLocalDate());
-            asr.setTime(asrList.getStartTime().toLocalTime());
-            asr.setObjectInstance(asrList.getObjectInstance());
-            asr.setCallAttemptTimes(asrList.getCallAttemptTimes());
-            asr.setAnswerTimes(asrList.getAnswerTimes());
-            asr.setAnswerRatio(asrList.getAnswerRatio());
-            asr.setAbandonBeforeRingTimes(asrList.getAbandonBeforeRingTimes());
-            asr.setAbandonAfterRingTimes(asrList.getAbandonAfterRingTimes());
-            asr.setRingedNoAnswerTimes(asrList.getRingedNoAnswerTimes());
-            asr.setUserDeterminatedBusyTimes(asrList.getUserDeterminatedBusyTimes());
-            asr.setUserBusyTimes(asrList.getUserBusyTimes());
-            asr.setInvalidAddressTimes(asrList.getInvalidAddressTimes());
-            asr.setPagingNoResponseTimes(asrList.getPagingNoResponseTimes());
-            asr.setAbsentSubscriberTimes(asrList.getAbsentSubscriberTimes());
-            asr.setSubscriberServiceRestrictedTimes(asrList.getSubscriberServiceRestrictedTimes());
-            asr.setSpecialSignalTonePlayedTimes(asrList.getSpecialSignalTonePlayedTimes());
-            asr.setTheCalledNoRespond(asrList.getTheCalledNoRespond());
-
-            int suc_Attampt = asrList.getAnswerTimes() + asrList.getAbandonBeforeRingTimes() + asrList.getAbandonAfterRingTimes() +
-                    asrList.getRingedNoAnswerTimes() + asrList.getUserDeterminatedBusyTimes() + asrList.getUserBusyTimes() +
-                    asrList.getInvalidAddressTimes() + asrList.getPagingNoResponseTimes() + asrList.getAbsentSubscriberTimes() +
-                    asrList.getSubscriberServiceRestrictedTimes() + asrList.getSpecialSignalTonePlayedTimes() + asrList.getTheCalledNoRespond();
-
-            asr.setSucAttempt(suc_Attampt);
-            asr.setNer(asrList.getCallAttemptTimes() > 0 ?  (double) suc_Attampt / asrList.getCallAttemptTimes() : (double) asrList.getCallAttemptTimes());
-            System.out.println((double) asrList.getAnswerTimes()/ asrList.getCallAttemptTimes());
-            asr.setAsr((asrList.getCallAttemptTimes() > 0) ? (double)asrList.getAnswerTimes()/ asrList.getCallAttemptTimes() : (double) asrList.getCallAttemptTimes());
-
-            savedAsr.add(asr);
-        }
-        return asrRepo.saveAll(savedAsr);
+         return AsrMapper.INSTANCE.toDto(asrRepo.saveAll
+                 (CreateAsrMapper.INSTANCE.toEntity(createAsrRequest)));
     }
+
+//    public List<AsrDto> updateAll(){
+//
+//        return AsrMapper.INSTANCE.toDto(asrRepo.saveAll
+//                (AsrMapper.INSTANCE.toEntity(AsrMapper.INSTANCE.toDto(asrRepo.findAll()))));
+//    }
 
     public List<Asr> updateAll(){
 

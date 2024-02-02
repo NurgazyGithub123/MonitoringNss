@@ -1,7 +1,7 @@
 package com.example.monitoringNss.service.impl;
 
-import com.example.monitoringNss.domain.model.dto.VlrSummaryDto;
-import com.example.monitoringNss.domain.model.dto.VlrSummaryKpiDto;
+import com.example.monitoringNss.domain.model.dto.dtos.VlrSummaryDtoInterface;
+import com.example.monitoringNss.domain.model.dto.dtos.VlrSummaryKpiDtoInterface;
 import com.example.monitoringNss.domain.model.entity.VlrSummaryKpi;
 import com.example.monitoringNss.domain.repository.VlrSummaryKpiRepo;
 import com.example.monitoringNss.domain.repository.VlrSummaryRepo;
@@ -25,7 +25,7 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
 
     public VlrSummaryKpi avgDay(String date){
 
-        VlrSummaryKpiDto vlrSummary = vlrSummaryKpiRepo.avgDay(LocalDate.parse(date));
+        VlrSummaryKpiDtoInterface vlrSummary = vlrSummaryKpiRepo.avgDay(LocalDate.parse(date));
         VlrSummaryKpi vlrSummaryKpi = new VlrSummaryKpi();
 
         vlrSummaryKpi.setDate(vlrSummary.getDate());
@@ -45,10 +45,10 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
     @Override
     public List<VlrSummaryKpi> avgDayAll() {
 
-        List<VlrSummaryDto> vlrSummaryList  = vlrSummaryRepo.avgDayAll();
+        List<VlrSummaryDtoInterface> vlrSummaryList  = vlrSummaryRepo.avgDayAll();
         List<VlrSummaryKpi> savedVlr = new ArrayList<>();
 
-        for (VlrSummaryDto vlrSummary : vlrSummaryList) {
+        for (VlrSummaryDtoInterface vlrSummary : vlrSummaryList) {
 
             VlrSummaryKpi vlrSummaryKpi = new VlrSummaryKpi();
             vlrSummaryKpi.setDate(vlrSummary.getDate());

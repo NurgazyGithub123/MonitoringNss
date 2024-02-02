@@ -1,7 +1,6 @@
 package com.example.monitoringNss.controller;
 
 
-import com.example.monitoringNss.exception.EntityNotFoundException;
 import com.example.monitoringNss.service.AsrKpiService;
 import lombok.AccessLevel;
 import lombok.NonNull;
@@ -10,6 +9,8 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class AsrKpiController {
     public ResponseEntity<?> asrFindByDate(@PathVariable String date){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(asrKpiService.asrFindByDate(date));
+                .body(asrKpiService.asrFindByDate(LocalDate.parse(date)));
     }
 
     @GetMapping("/asrFindById/{id}")

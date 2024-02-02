@@ -1,50 +1,63 @@
 package com.example.monitoringNss.domain.model.dto;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-public interface AsrDto {
 
-    Long getId();
+@Data
+@Builder
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public class AsrDto implements Serializable {
 
-    String getObjectInstance();
+    Long id;
 
-    LocalDateTime getStartTime();
+    String objectInstance;
 
-    LocalDate getDate();
+    LocalDateTime startTime;
 
-    LocalTime getTime();
+    LocalDate date;
 
-    int getCallAttemptTimes();
+    LocalTime time;
 
-    int getAnswerTimes();
+    int callAttemptTimes;
 
-    Double getAnswerRatio();
+    int answerTimes;
 
-    int getAbandonBeforeRingTimes();
+    Double answerRatio;
 
-    int getAbandonAfterRingTimes();
+    int abandonBeforeRingTimes;
 
-    int getRingedNoAnswerTimes();
+    int abandonAfterRingTimes;
 
-    int getUserDeterminatedBusyTimes();
+    int ringedNoAnswerTimes;
 
-    int getUserBusyTimes();
+    int userDeterminatedBusyTimes;
 
-    int getInvalidAddressTimes();
+    int userBusyTimes;
 
-    int getPagingNoResponseTimes();
+    int invalidAddressTimes;
 
-    int getAbsentSubscriberTimes();
+    int pagingNoResponseTimes;
 
-    int getSubscriberServiceRestrictedTimes();
+    int absentSubscriberTimes;
 
-    int getSpecialSignalTonePlayedTimes();
+    int subscriberServiceRestrictedTimes;
 
-    int getTheCalledNoRespond();
+    int specialSignalTonePlayedTimes;
 
-    Double getSucAttempt();
+    int theCalledNoRespond;
 
+    Double asr;
 
+    Double ner;
+
+    Integer sucAttempt;
 }

@@ -1,8 +1,8 @@
-package com.example.monitoringNss.domain.model.dto;
+package com.example.monitoringNss.domain.model.dto.dtos;
 
 import java.time.LocalDate;
 
-public interface VlrSummaryDto {
+public interface VlrSummaryDtoInterface {
 
     Long getId();
     String getMsxName();

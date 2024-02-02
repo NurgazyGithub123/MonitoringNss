@@ -1,16 +1,16 @@
-package com.example.monitoringNss.domain.model.dto.request;
+package com.example.monitoringNss.domain.model.request;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AsrRequest {
+public class CreateAsrRequest {
 
     String objectInstance;
 

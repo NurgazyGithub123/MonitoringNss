@@ -1,8 +1,10 @@
 package com.example.monitoringNss.service.impl;
 
-import com.example.monitoringNss.domain.model.dto.AsrDto;
+import com.example.monitoringNss.domain.model.dto.dtos.AsrDtoInterface;
 import com.example.monitoringNss.domain.model.dto.AsrKpiDto;
+import com.example.monitoringNss.domain.model.dto.dtos.AsrKpiDtoInterface;
 import com.example.monitoringNss.domain.model.entity.AsrKpi;
+import com.example.monitoringNss.domain.model.mapper.AsrKpiMapper;
 import com.example.monitoringNss.domain.repository.AsrKpiRepo;
 import com.example.monitoringNss.exception.EntityNotFoundException;
 import com.example.monitoringNss.service.AsrKpiService;
@@ -23,34 +25,39 @@ public class AsrKpiServiceImpl implements AsrKpiService {
     private final AsrKpiRepo asrKpiRepo;
 
     @Override
-    public List<AsrKpi> asrSaveAlltoAsrKPI() {
+    public List<AsrKpiDto> asrSaveAlltoAsrKPI() {
 
-        List<AsrDto> asrFindAllDay = asrKpiRepo.findAllByDay();
+        List<AsrDtoInterface> asrFindAllDay = asrKpiRepo.findAllByDay();
         List<AsrKpi> savedAsrKpi = new ArrayList<>();
 
-        int count = 0;
+        for(AsrDtoInterface asrDto : asrFindAllDay){
+            AsrKpi asrKpi = new AsrKpi();
+            asrKpi.setObjectInstance(asrDto.getObjectInstance());
+            asrKpi.setDate(asrDto.getDate());
+            asrKpi.setSucAttempt(asrDto.getSucAttempt());
+            asrKpi.setAsr(asrDto.getCallAttemptTimes() > 0 ? (double)asrDto.getAnswerTimes()
+                    / asrDto.getCallAttemptTimes()*100 : asrDto.getCallAttemptTimes());
+            asrKpi.setNer(asrDto.getCallAttemptTimes() > 0 ? (double)asrDto.getSucAttempt()
+                    / asrDto.getCallAttemptTimes()*100 : asrDto.getCallAttemptTimes());
 
-        for(AsrDto asrKpi : asrFindAllDay){
-            AsrKpi asr = new AsrKpi();
-            asr.setObjectInstance(asrKpi.getObjectInstance());
-            asr.setDate(asrKpi.getDate());
-            asr.setSucAttempt(asrKpi.getSucAttempt());
-            asr.setAsr(asrKpi.getCallAttemptTimes() > 0 ? (double)asrKpi.getAnswerTimes()
-                    / asrKpi.getCallAttemptTimes()*100 : asrKpi.getCallAttemptTimes());
-            asr.setNer(asrKpi.getCallAttemptTimes() > 0 ? asrKpi.getSucAttempt()
-                    / asrKpi.getCallAttemptTimes()*100 : asrKpi.getCallAttemptTimes());
-
-            savedAsrKpi.add(asr);
+            savedAsrKpi.add(asrKpi);
         }
-        return asrKpiRepo.saveAll(savedAsrKpi);
+        return AsrKpiMapper.INSTANCE.toDto(asrKpiRepo.saveAll(savedAsrKpi));
     }
 
     @Override
-    public List<AsrKpiDto> asrFindByDate(String date) {
-        List<AsrKpiDto> asrKpiDto = asrKpiRepo.findBiDate(LocalDate.parse(date));
-        System.out.println(asrKpiDto);
+    public List<AsrKpiDto> asrFindByDate(LocalDate date) {
+        List<AsrKpiDtoInterface> asrFindList = asrKpiRepo.findBiDate(date);
+        List<AsrKpiDto> asrKpiDtos = new ArrayList<>();
 
-        return asrKpiDto;
+        for (AsrKpiDtoInterface asrKpiDto : asrFindList){
+            AsrKpiDto asrKpiDto1 = AsrKpiDto.builder()
+                    .asr(asrKpiDto.getAsr())
+                    .build();
+            asrKpiDtos.add(asrKpiDto1);
+        }
+
+        return asrKpiDtos;
     }
 
     @Override
@@ -63,6 +70,19 @@ public class AsrKpiServiceImpl implements AsrKpiService {
 
     @Override
     public List<AsrKpiDto> asrFindByObjectInstance(String objectInstance) {
-        return asrKpiRepo.findAsrKpiByObjectInstance(objectInstance);
+        List<AsrKpiDtoInterface> asrKpiDto  = asrKpiRepo.findAsrKpiByObjectInstance(objectInstance);
+        List<AsrKpiDto> asrKpis = new ArrayList<>();
+
+        for (AsrKpiDtoInterface asrKpi : asrKpiDto){
+            AsrKpiDto asrKpiDto1 = AsrKpiDto.builder()
+                    .asr(asrKpi.getAsr())
+                    .objectInstance(asrKpi.getObjectInstance())
+                    .ner(asrKpi.getNer())
+                    .date(asrKpi.getDate())
+                    .build();
+            asrKpis.add(asrKpiDto1);
+        }
+
+        return asrKpis;
     }
 }

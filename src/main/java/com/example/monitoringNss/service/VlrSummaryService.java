@@ -1,7 +1,7 @@
 package com.example.monitoringNss.service;
 
 import com.example.monitoringNss.domain.model.entity.VlrSummary;
-import com.example.monitoringNss.domain.model.dto.request.VlrSummaryRequest;
+import com.example.monitoringNss.domain.model.request.VlrSummaryRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

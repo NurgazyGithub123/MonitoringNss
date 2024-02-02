@@ -4,14 +4,15 @@ import com.example.monitoringNss.domain.model.dto.AsrKpiDto;
 import com.example.monitoringNss.domain.model.entity.AsrKpi;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public interface AsrKpiService{
 
-    List<AsrKpi> asrSaveAlltoAsrKPI();
+    List<AsrKpiDto> asrSaveAlltoAsrKPI();
 
-    List<AsrKpiDto> asrFindByDate(String date);
+    List<AsrKpiDto> asrFindByDate(LocalDate date);
 
     AsrKpi asrFindByID(Long id);
 
