@@ -19,6 +19,11 @@ import java.time.LocalTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Asr extends BaseEntity{
 
+    @Id
+    @Column(name = "id", nullable = false, columnDefinition = "TIMESTAMP ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+
     String objectInstance;
 
     LocalDateTime startTime;

@@ -3,7 +3,6 @@ package com.example.monitoringNss.service.impl;
 import com.example.monitoringNss.domain.model.dto.AsrDto;
 import com.example.monitoringNss.domain.model.entity.Asr;
 import com.example.monitoringNss.domain.model.mapper.AsrMapper;
-import com.example.monitoringNss.domain.model.mapper.CreateAsrMapper;
 import com.example.monitoringNss.domain.model.request.CreateAsrRequest;
 import com.example.monitoringNss.domain.repository.AsrRepo;
 import com.example.monitoringNss.service.AsrService;
@@ -26,17 +25,12 @@ public class AsrServiceImpl implements AsrService {
     @Override
     public List<AsrDto> create(List<CreateAsrRequest> createAsrRequest) {
 
-         return AsrMapper.INSTANCE.toDto(asrRepo.saveAll
-                 (CreateAsrMapper.INSTANCE.toEntity(createAsrRequest)));
+         return AsrMapper.INSTANCE.entityToDtoList(asrRepo.saveAll
+                 (AsrMapper.INSTANCE.requestToEntityList(createAsrRequest)));
     }
 
-//    public List<AsrDto> updateAll(){
-//
-//        return AsrMapper.INSTANCE.toDto(asrRepo.saveAll
-//                (AsrMapper.INSTANCE.toEntity(AsrMapper.INSTANCE.toDto(asrRepo.findAll()))));
-//    }
 
-    public List<Asr> updateAll(){
+    public List<AsrDto> updateAll(){
 
         List<Asr> asrList = asrRepo.findAll();
         List<Asr> savedAsr = new ArrayList<>();
@@ -80,7 +74,7 @@ public class AsrServiceImpl implements AsrService {
 
             savedAsr.add(asr);
         }
-        return asrRepo.saveAll(savedAsr);
+        return AsrMapper.INSTANCE.entityToDtoList(asrRepo.saveAll(savedAsr));
     }
 
 }

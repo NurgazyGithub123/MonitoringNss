@@ -14,7 +14,7 @@ public interface AsrKpiService{
 
     List<AsrKpiDto> asrFindByDate(LocalDate date);
 
-    AsrKpi asrFindByID(Long id);
+    AsrKpiDto asrFindByID(Long id);
 
     List<AsrKpiDto> asrFindByObjectInstance(String objectInstance);
 }

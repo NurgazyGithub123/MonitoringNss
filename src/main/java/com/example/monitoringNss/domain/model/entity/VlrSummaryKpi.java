@@ -3,9 +3,7 @@ package com.example.monitoringNss.domain.model.entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter
@@ -16,6 +14,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class VlrSummaryKpi extends BaseEntity{
+
+    @Id
+    @Column(name = "id", nullable = false, columnDefinition = "TIMESTAMP ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
     @Column(name = "msx_name")
     String msxName;

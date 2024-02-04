@@ -1,8 +1,9 @@
 package com.example.monitoringNss.service.impl;
 
+import com.example.monitoringNss.domain.model.dto.VlrSummaryKpiDto;
 import com.example.monitoringNss.domain.model.dto.dtos.VlrSummaryDtoInterface;
 import com.example.monitoringNss.domain.model.dto.dtos.VlrSummaryKpiDtoInterface;
-import com.example.monitoringNss.domain.model.entity.VlrSummaryKpi;
+import com.example.monitoringNss.domain.model.mapper.VlrSummaryKpiMapper;
 import com.example.monitoringNss.domain.repository.VlrSummaryKpiRepo;
 import com.example.monitoringNss.domain.repository.VlrSummaryRepo;
 import com.example.monitoringNss.service.VlrSummaryKpiService;
@@ -23,48 +24,82 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
     private final VlrSummaryKpiRepo vlrSummaryKpiRepo;
     private final VlrSummaryRepo vlrSummaryRepo;
 
-    public VlrSummaryKpi avgDay(String date){
+    public VlrSummaryKpiDto avgDay(String date){
 
         VlrSummaryKpiDtoInterface vlrSummary = vlrSummaryKpiRepo.avgDay(LocalDate.parse(date));
-        VlrSummaryKpi vlrSummaryKpi = new VlrSummaryKpi();
-
-        vlrSummaryKpi.setDate(vlrSummary.getDate());
-        vlrSummaryKpi.setYear(vlrSummary.getYear());
-        vlrSummaryKpi.setMonth(vlrSummary.getMonth());
-        vlrSummaryKpi.setMsxName(vlrSummary.getMsxName());
-        vlrSummaryKpi.setVlr4g( vlrSummary.getVlr4g());
-        vlrSummaryKpi.setPrepaid(vlrSummary.getPrepaid());
-        vlrSummaryKpi.setTotal(vlrSummary.getTotal());
-        vlrSummaryKpi.setPostpaid(vlrSummary.getPostpaid());
-        vlrSummaryKpi.setCamel(vlrSummary.getCamel());
-        vlrSummaryKpi.setRoaming(vlrSummary.getRoaming());
+        VlrSummaryKpiDto vlrSummaryKpi = VlrSummaryKpiDto
+                .builder()
+                .id(vlrSummary.getId())
+                .vlr4g(vlrSummary.getVlr4g())
+                .total(vlrSummary.getTotal())
+                .year(vlrSummary.getYear())
+                .month(vlrSummary.getMonth())
+                .roaming(vlrSummary.getRoaming())
+                .camel(vlrSummary.getCamel())
+                .msxName(vlrSummary.getMsxName())
+                .prepaid(vlrSummary.getPrepaid())
+                .postpaid(vlrSummary.getPostpaid())
+                .date(vlrSummary.getDate())
+                .build();
 
         return vlrSummaryKpi;
     }
 
     @Override
-    public List<VlrSummaryKpi> avgDayAll() {
+    public List<VlrSummaryKpiDto> avgDayAll() {
 
         List<VlrSummaryDtoInterface> vlrSummaryList  = vlrSummaryRepo.avgDayAll();
-        List<VlrSummaryKpi> savedVlr = new ArrayList<>();
+        List<VlrSummaryKpiDto> savedVlr = new ArrayList<>();
 
         for (VlrSummaryDtoInterface vlrSummary : vlrSummaryList) {
 
-            VlrSummaryKpi vlrSummaryKpi = new VlrSummaryKpi();
-            vlrSummaryKpi.setDate(vlrSummary.getDate());
-            vlrSummaryKpi.setMonth(String.valueOf(vlrSummary.getDate().getMonth()));
-            vlrSummaryKpi.setYear(String.valueOf(vlrSummary.getDate().getYear()));
-            vlrSummaryKpi.setVlr4g(vlrSummary.getVlrSGs());
-            vlrSummaryKpi.setPrepaid(vlrSummary.getVlrLocal());
-            vlrSummaryKpi.setTotal(vlrSummary.getTotal());
-            vlrSummaryKpi.setPostpaid(vlrSummary.getBitel());
-            vlrSummaryKpi.setCamel(vlrSummary.getVlrCamel());
-            vlrSummaryKpi.setRoaming(vlrSummary.getVlrRoaming());
-            vlrSummaryKpi.setMsxName("network");
+            VlrSummaryKpiDto vlrSummaryKpi = VlrSummaryKpiDto
+                    .builder()
+                    .id(vlrSummary.getId())
+                    .vlr4g(vlrSummary.getVlrSGs())
+                    .total(vlrSummary.getTotal())
+                    .year(String.valueOf(vlrSummary.getDate().getYear()))
+                    .month(String.valueOf(vlrSummary.getDate().getMonth()))
+                    .roaming(vlrSummary.getVlrRoaming())
+                    .camel(vlrSummary.getVlrCamel())
+                    .msxName(vlrSummary.getMsxName())
+                    .prepaid(vlrSummary.getVlrLocal())
+                    .postpaid(vlrSummary.getBitel())
+                    .date(vlrSummary.getDate())
+                    .build();
 
             savedVlr.add( vlrSummaryKpi);
-            vlrSummaryKpiRepo.save(vlrSummaryKpi);
         }
+
+        vlrSummaryKpiRepo.saveAll(VlrSummaryKpiMapper.INSTANCE.dtoToEntityList(savedVlr));
         return  savedVlr;
+    }
+
+    @Override
+    public List<VlrSummaryKpiDto> findAvgDateAll() {
+
+        List<VlrSummaryDtoInterface> vlrSummaryList  = vlrSummaryRepo.avgDayAll();
+        List<VlrSummaryKpiDto> savedVlr = new ArrayList<>();
+
+        for (VlrSummaryDtoInterface vlrSummary : vlrSummaryList) {
+
+            VlrSummaryKpiDto vlrSummaryKpi = VlrSummaryKpiDto
+                    .builder()
+                    .id(vlrSummary.getId())
+                    .vlr4g(vlrSummary.getVlrSGs())
+                    .total(vlrSummary.getTotal())
+                    .year(String.valueOf(vlrSummary.getDate().getYear()))
+                    .month(String.valueOf(vlrSummary.getDate().getMonth()))
+                    .roaming(vlrSummary.getVlrRoaming())
+                    .camel(vlrSummary.getVlrCamel())
+                    .msxName(vlrSummary.getMsxName())
+                    .prepaid(vlrSummary.getVlrLocal())
+                    .postpaid(vlrSummary.getBitel())
+                    .date(vlrSummary.getDate())
+                    .build();
+
+            savedVlr.add( vlrSummaryKpi);
+        }
+        return savedVlr;
     }
 }

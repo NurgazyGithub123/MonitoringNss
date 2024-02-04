@@ -13,6 +13,6 @@ public interface AsrService {
 
     List<AsrDto> create(List<CreateAsrRequest> createAsrRequest);
 
-    List<Asr> updateAll();
+    List<AsrDto> updateAll();
 
 }

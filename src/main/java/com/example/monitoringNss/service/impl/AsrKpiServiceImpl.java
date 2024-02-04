@@ -42,7 +42,7 @@ public class AsrKpiServiceImpl implements AsrKpiService {
 
             savedAsrKpi.add(asrKpi);
         }
-        return AsrKpiMapper.INSTANCE.toDto(asrKpiRepo.saveAll(savedAsrKpi));
+        return AsrKpiMapper.INSTANCE.toDtoList(asrKpiRepo.saveAll(savedAsrKpi));
     }
 
     @Override
@@ -53,6 +53,8 @@ public class AsrKpiServiceImpl implements AsrKpiService {
         for (AsrKpiDtoInterface asrKpiDto : asrFindList){
             AsrKpiDto asrKpiDto1 = AsrKpiDto.builder()
                     .asr(asrKpiDto.getAsr())
+                    .date(asrKpiDto.getDate())
+                    .ner(asrKpiDto.getNer())
                     .build();
             asrKpiDtos.add(asrKpiDto1);
         }
@@ -61,10 +63,12 @@ public class AsrKpiServiceImpl implements AsrKpiService {
     }
 
     @Override
-    public AsrKpi asrFindByID(Long id) {
-        return asrKpiRepo
+    public AsrKpiDto asrFindByID(Long id) {
+         AsrKpi asr = asrKpiRepo
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Asr with id = " + id + "not found"));
+
+        return AsrKpiMapper.INSTANCE.toDto(asr);
 
     }
 

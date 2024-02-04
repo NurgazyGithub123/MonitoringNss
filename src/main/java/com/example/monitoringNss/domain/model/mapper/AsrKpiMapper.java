@@ -10,7 +10,7 @@ public class AsrKpiMapper {
 
     public static final AsrKpiMapper INSTANCE = new AsrKpiMapper();
 
-    public List<AsrKpiDto> toDto(List<AsrKpi> asrKpi){
+    public List<AsrKpiDto> toDtoList(List<AsrKpi> asrKpi){
 
         List<AsrKpiDto> asrKpiDtos = new ArrayList<>();
         for (AsrKpi asrlist : asrKpi){
@@ -30,7 +30,7 @@ public class AsrKpiMapper {
         return asrKpiDtos;
     }
 
-    public List<AsrKpi> toEntity(List<AsrKpiDto> asrKpiDto){
+    public List<AsrKpi> toEntityList(List<AsrKpiDto> asrKpiDto){
 
         List<AsrKpi> asrKpis = new ArrayList<>();
         for (AsrKpiDto asrDtolist : asrKpiDto){
@@ -48,5 +48,35 @@ public class AsrKpiMapper {
             asrKpis.add(asrKpi);
         }
         return asrKpis;
+    }
+
+    public AsrKpi toEntity(AsrKpiDto asrKpiDto){
+
+            AsrKpi asrKpi = new AsrKpi();
+            asrKpi.setId(asrKpiDto.getId());
+            asrKpi.setDate(asrKpiDto.getDate());
+            asrKpi.setObjectInstance(asrKpiDto.getObjectInstance());
+            asrKpi.setSucAttempt(asrKpiDto.getSucAttempt());
+            asrKpi.setAsr(asrKpiDto.getAsr());
+            asrKpi.setNer(asrKpiDto.getNer());
+            asrKpi.setAnswerTimes(asrKpiDto.getAnswerTimes());
+            asrKpi.setCallAttemptTimes(asrKpiDto.getCallAttemptTimes());
+
+        return asrKpi;
+    }
+
+    public AsrKpiDto toDto(AsrKpi asrKpi){
+
+        return AsrKpiDto
+                .builder()
+                .id(asrKpi.getId())
+                .ner(asrKpi.getNer())
+                .date(asrKpi.getDate())
+                .asr(asrKpi.getAsr())
+                .callAttemptTimes(asrKpi.getCallAttemptTimes())
+                .objectInstance(asrKpi.getObjectInstance())
+                .sucAttempt(asrKpi.getSucAttempt())
+                .answerTimes(asrKpi.getAnswerTimes())
+                .build();
     }
 }

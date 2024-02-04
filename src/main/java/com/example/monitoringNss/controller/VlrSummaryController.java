@@ -1,5 +1,6 @@
 package com.example.monitoringNss.controller;
 
+import com.example.monitoringNss.domain.model.dto.VlrSummaryKpiDto;
 import com.example.monitoringNss.domain.model.entity.VlrSummaryKpi;
 import com.example.monitoringNss.domain.model.request.VlrSummaryRequest;
 import com.example.monitoringNss.service.VlrSummaryKpiService;
@@ -26,12 +27,6 @@ public class VlrSummaryController {
     @NonNull
     VlrSummaryKpiService vlrSummaryKpiService;
 
-    @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody @Validated VlrSummaryRequest createVlrSummaryRequest){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(vlrSummaryService.create(createVlrSummaryRequest));
-    }
 
     @PostMapping("/saveToVlr")
     public ResponseEntity<?> saveAllToVlr(@RequestBody @Validated List<VlrSummaryRequest> createVlrSummaryRequest){
@@ -39,9 +34,14 @@ public class VlrSummaryController {
                 .body(vlrSummaryService.saveAll(createVlrSummaryRequest));
     }
 
-    @PutMapping("/avgDateAll")
-    public List<VlrSummaryKpi> avgDateAll(){
+    @PutMapping("/saveAvgDateToVlrSummaryKpiAll")
+    public List<VlrSummaryKpiDto> saveAvgDateToVlrSummaryKpiAll(){
         return vlrSummaryKpiService.avgDayAll();
+    }
+
+    @GetMapping("/findAvgDateAll")
+    public List<VlrSummaryKpiDto> findAvgDateAll(){
+        return vlrSummaryKpiService.findAvgDateAll();
     }
 
 }
