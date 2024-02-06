@@ -3,6 +3,7 @@ package com.example.monitoringNss.service.impl;
 import com.example.monitoringNss.domain.model.dto.VlrSummaryKpiDto;
 import com.example.monitoringNss.domain.model.dto.dtos.VlrSummaryDtoInterface;
 import com.example.monitoringNss.domain.model.dto.dtos.VlrSummaryKpiDtoInterface;
+import com.example.monitoringNss.domain.model.entity.VlrSummaryKpi;
 import com.example.monitoringNss.domain.model.mapper.VlrSummaryKpiMapper;
 import com.example.monitoringNss.domain.repository.VlrSummaryKpiRepo;
 import com.example.monitoringNss.domain.repository.VlrSummaryRepo;
@@ -40,6 +41,7 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
                 .prepaid(vlrSummary.getPrepaid())
                 .postpaid(vlrSummary.getPostpaid())
                 .date(vlrSummary.getDate())
+                .week(vlrSummary.getWeek())
                 .build();
 
         return vlrSummaryKpi;
@@ -66,12 +68,15 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
                     .prepaid(vlrSummary.getVlrLocal())
                     .postpaid(vlrSummary.getBitel())
                     .date(vlrSummary.getDate())
+                    .week(vlrSummary.getWeek())
                     .build();
 
             savedVlr.add( vlrSummaryKpi);
-        }
 
-        vlrSummaryKpiRepo.saveAll(VlrSummaryKpiMapper.INSTANCE.dtoToEntityList(savedVlr));
+        }
+        List<VlrSummaryKpi> list = VlrSummaryKpiMapper.INSTANCE.dtoToEntityList(savedVlr);
+
+        vlrSummaryKpiRepo.saveAll(list);
         return  savedVlr;
     }
 
@@ -95,9 +100,10 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
                     .msxName(vlrSummary.getMsxName())
                     .prepaid(vlrSummary.getVlrLocal())
                     .postpaid(vlrSummary.getBitel())
+                    .week(vlrSummary.getWeek())
                     .date(vlrSummary.getDate())
-                    .build();
 
+                    .build();
             savedVlr.add( vlrSummaryKpi);
         }
         return savedVlr;

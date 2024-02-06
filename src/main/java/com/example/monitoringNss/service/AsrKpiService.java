@@ -1,5 +1,6 @@
 package com.example.monitoringNss.service;
 
+import com.example.monitoringNss.domain.model.AsrKpiResponse;
 import com.example.monitoringNss.domain.model.dto.AsrKpiDto;
 import com.example.monitoringNss.domain.model.entity.AsrKpi;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ public interface AsrKpiService{
 
     List<AsrKpiDto> asrSaveAlltoAsrKPI();
 
-    List<AsrKpiDto> asrFindByDate(LocalDate date);
+    List<AsrKpiResponse> asrFindByDate(LocalDate date);
 
     AsrKpiDto asrFindByID(Long id);
 

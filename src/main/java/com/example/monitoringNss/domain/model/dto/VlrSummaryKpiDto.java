@@ -26,4 +26,5 @@ public class VlrSummaryKpiDto {
     LocalDate date;
     String month;
     String year;
+    String week;
 }

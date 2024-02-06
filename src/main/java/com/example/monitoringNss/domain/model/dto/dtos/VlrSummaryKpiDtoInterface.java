@@ -23,4 +23,6 @@ public interface VlrSummaryKpiDtoInterface {
     String getMonth();
 
     String getYear();
+
+    String getWeek();
 }

@@ -17,7 +17,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Asr extends BaseEntity{
+public class Asr{
 
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "TIMESTAMP ")

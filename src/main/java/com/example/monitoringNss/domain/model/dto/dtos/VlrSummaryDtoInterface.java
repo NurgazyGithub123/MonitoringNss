@@ -20,4 +20,6 @@ public interface VlrSummaryDtoInterface {
     Long getVlrSGs();
 
     LocalDate getDate();
+
+    String getWeek();
 }

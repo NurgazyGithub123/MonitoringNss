@@ -15,7 +15,7 @@ import java.time.LocalTime;
 @Table(name = "tb_vlrsummary")
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class VlrSummary extends BaseEntity{
+public class VlrSummary{
 
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "TIMESTAMP ")

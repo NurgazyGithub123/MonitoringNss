@@ -18,7 +18,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AsrKpi extends BaseEntity{
+public class AsrKpi{
 
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "TIMESTAMP ")

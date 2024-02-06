@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Table(name = "tb_vlrsummary_kpi")
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class VlrSummaryKpi extends BaseEntity{
+public class VlrSummaryKpi{
 
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "TIMESTAMP ")
@@ -31,14 +31,16 @@ public class VlrSummaryKpi extends BaseEntity{
 
     Long total;
 
-    @Column(name = "postpaid", nullable = false)
+    @Column(name = "postpaid")
     Long postpaid;
 
     Long vlr4g;
-    @Column(nullable = false, unique = true)
+
     LocalDate date;
 
     String month;
 
     String year;
+
+    String week;
 }

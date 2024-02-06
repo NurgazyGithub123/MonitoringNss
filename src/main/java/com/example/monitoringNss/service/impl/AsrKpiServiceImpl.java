@@ -1,5 +1,6 @@
 package com.example.monitoringNss.service.impl;
 
+import com.example.monitoringNss.domain.model.AsrKpiResponse;
 import com.example.monitoringNss.domain.model.dto.dtos.AsrDtoInterface;
 import com.example.monitoringNss.domain.model.dto.AsrKpiDto;
 import com.example.monitoringNss.domain.model.dto.dtos.AsrKpiDtoInterface;
@@ -11,6 +12,7 @@ import com.example.monitoringNss.service.AsrKpiService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -46,12 +48,13 @@ public class AsrKpiServiceImpl implements AsrKpiService {
     }
 
     @Override
-    public List<AsrKpiDto> asrFindByDate(LocalDate date) {
+    public List<AsrKpiResponse> asrFindByDate(LocalDate date) {
         List<AsrKpiDtoInterface> asrFindList = asrKpiRepo.findBiDate(date);
-        List<AsrKpiDto> asrKpiDtos = new ArrayList<>();
+        List<AsrKpiResponse> asrKpiDtos = new ArrayList<>();
 
         for (AsrKpiDtoInterface asrKpiDto : asrFindList){
-            AsrKpiDto asrKpiDto1 = AsrKpiDto.builder()
+            AsrKpiResponse asrKpiDto1 = AsrKpiResponse.builder()
+                    .objectInstance(asrKpiDto.getObjectInstance())
                     .asr(asrKpiDto.getAsr())
                     .date(asrKpiDto.getDate())
                     .ner(asrKpiDto.getNer())

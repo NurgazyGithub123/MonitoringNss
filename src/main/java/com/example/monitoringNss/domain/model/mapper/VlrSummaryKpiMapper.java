@@ -24,6 +24,7 @@ public class VlrSummaryKpiMapper {
         vlrSummaryKpi.setPostpaid(vlrSummaryKpiDto.getPostpaid());
         vlrSummaryKpi.setPrepaid(vlrSummaryKpiDto.getPrepaid());
         vlrSummaryKpi.setYear(vlrSummaryKpiDto.getYear());
+        vlrSummaryKpi.setWeek(vlrSummaryKpi.getWeek());
 
         return vlrSummaryKpi;
     }
@@ -42,6 +43,7 @@ public class VlrSummaryKpiMapper {
                .msxName(vlrSummaryKpi.getMsxName())
                .postpaid(vlrSummaryKpi.getPostpaid())
                .date(vlrSummaryKpi.getDate())
+               .week(vlrSummaryKpi.getWeek())
                .build();
     }
 
@@ -62,6 +64,7 @@ public class VlrSummaryKpiMapper {
             vlrSummaryKpi.setPostpaid(vlrSummaryKpiDto.getPostpaid());
             vlrSummaryKpi.setPrepaid(vlrSummaryKpiDto.getPrepaid());
             vlrSummaryKpi.setYear(vlrSummaryKpiDto.getYear());
+            vlrSummaryKpi.setWeek(vlrSummaryKpiDto.getWeek());
 
             vlrSummaryKpiList.add(vlrSummaryKpi);
         }
@@ -86,6 +89,7 @@ public class VlrSummaryKpiMapper {
                     .msxName(vlrSummaryKpi.getMsxName())
                     .postpaid(vlrSummaryKpi.getPostpaid())
                     .date(vlrSummaryKpi.getDate())
+                    .week(vlrSummaryKpi.getWeek())
                     .build();
 
             vlrSummaryKpiDtoList.add(vlrSummaryKpiDto);

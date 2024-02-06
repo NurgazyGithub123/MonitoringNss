@@ -23,4 +23,5 @@ public interface AsrKpiRepo extends JpaRepository<AsrKpi, Long> {
 
     @Query(value = "SELECT kpi.asr, kpi.ner, kpi.date, kpi.object_instance as objectInstance  from tb_asr_kpi as kpi WHERE kpi.object_instance =:objectInstance", nativeQuery = true)
     List<AsrKpiDtoInterface> findAsrKpiByObjectInstance(@Param("objectInstance") String objectInstance);
+
 }

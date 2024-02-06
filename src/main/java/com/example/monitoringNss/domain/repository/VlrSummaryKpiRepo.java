@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Repository
 public interface VlrSummaryKpiRepo extends JpaRepository<VlrSummaryKpi, Long> {
 
-    @Query(value = "select tv.msx_name as msxName, tv.date, tv.postpaid, tv.prepaid,tv.roaming, " +
+    @Query(value = "select tv.msx_name as msxName, tv.date, tv.week as week, tv.postpaid, tv.prepaid,tv.roaming, " +
             "tv.camel, tv.total, tv.vlr4g, tv.month, tv.year  from tb_vlrsummary_kpi as tv where tv.date =:date", nativeQuery = true)
     VlrSummaryKpiDtoInterface avgDay (@Param("date") LocalDate date);
 
