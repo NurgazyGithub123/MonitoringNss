@@ -1,19 +1,28 @@
 package com.example.monitoringNss.controller;
 
 import com.example.monitoringNss.domain.model.dto.VlrSummaryKpiDto;
-import com.example.monitoringNss.domain.model.entity.VlrSummaryKpi;
+import com.example.monitoringNss.domain.model.entity.VlrSummary;
 import com.example.monitoringNss.domain.model.request.VlrSummaryRequest;
 import com.example.monitoringNss.service.VlrSummaryKpiService;
 import com.example.monitoringNss.service.VlrSummaryService;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -42,6 +51,29 @@ public class VlrSummaryController {
     @GetMapping("/findAvgDateAll")
     public List<VlrSummaryKpiDto> findAvgDateAll(){
         return vlrSummaryKpiService.findAvgDateAll();
+    }
+
+    @PostMapping(value = "/uploadCsv")
+    public ResponseEntity<?> uploadVlrSummary() throws IOException, CsvException {
+        vlrSummaryService.uploadVlrSummary();
+
+        return ResponseEntity
+                .status(HttpStatus.OK).body("Success");
+    }
+
+    @GetMapping("exportCSv")
+    public void exportCsv(HttpServletResponse httpServletResponse) throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException, IOException{
+        String fileName = "export_vslSummary.csv";
+
+        httpServletResponse.setContentType("text/csv");
+        httpServletResponse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename " + fileName + "");
+
+        StatefulBeanToCsv<VlrSummary> writer = new StatefulBeanToCsvBuilder<VlrSummary>(httpServletResponse.getWriter())
+                .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+                .withOrderedResults(false)
+                .build();
+
+        writer.write(vlrSummaryService.findAll());
     }
 
 }

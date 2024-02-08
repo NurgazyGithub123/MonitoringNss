@@ -11,6 +11,7 @@ import com.example.monitoringNss.service.VlrSummaryKpiService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -108,4 +109,12 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
         }
         return savedVlr;
     }
+
+//    @Scheduled(cron = "0/60 * * * * ?")
+//    public void saveByVlrToTime(){
+//        System.out.println("gjgj");
+//        avgDayAll();
+//
+//    }
+
 }
