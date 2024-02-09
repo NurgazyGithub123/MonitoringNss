@@ -1,6 +1,8 @@
 package com.example.monitoringNss.service.impl;
 
 
+import com.example.monitoringNss.config.DateFormatToLocal;
+import com.example.monitoringNss.config.CastToType;
 import com.example.monitoringNss.domain.model.dto.VlrSummaryDto;
 import com.example.monitoringNss.domain.model.entity.VlrSummary;
 import com.example.monitoringNss.domain.model.mapper.VlrSummaryMapper;
@@ -13,12 +15,10 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -27,7 +27,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class VlrSummaryServiseImpl implements VlrSummaryService {
 
+
     private final String FALE_PPATH = "C:\\Users\\ndyykanbaev\\Desktop\\My Projects\\статистики\\VLR.csv";
+    File file = new File(FALE_PPATH);
 
     private final VlrSummaryRepo vlrSummaryRepo;
 
@@ -40,9 +42,12 @@ public class VlrSummaryServiseImpl implements VlrSummaryService {
     @Override
     public void uploadVlrSummary() throws IOException, CsvException {
 
-        CSVReader csvReader = new CSVReader(new FileReader(FALE_PPATH));
+
+       CSVReader csvReader = new CSVReader(new FileReader(file));
+
 
         List<String[]> rows = csvReader.readAll();
+
         List<VlrSummaryRequest> vlrSummaries = new ArrayList<>();
 
         rows.remove(0);
@@ -50,26 +55,20 @@ public class VlrSummaryServiseImpl implements VlrSummaryService {
             for (String[] row : rows){
                 VlrSummaryRequest vlrSummary = new VlrSummaryRequest();
 
-                System.out.println("row0 LLLLLL:  " + row.length);
-                System.out.println("row0 LLLLLL:  " + row[0]);
-                System.out.println("row0 LLLLLL:  " + row[1]);
+                String[] str = row[0].split(",");
 
-
-
-
-                System.out.println(Arrays.toString(row));
-                vlrSummary.setStartTime(row[0]);
-                vlrSummary.setMsxName(row[2]);
-                vlrSummary.setVlrLocal(Long.valueOf(row[4]));
-                vlrSummary.setVlrRoaming(Long.valueOf(row[5]));
-                vlrSummary.setVlrCamel(Long.valueOf(row[6]));
-                vlrSummary.setVlrCamel(Long.valueOf(row[7]));
-                vlrSummary.setVlrSGs(Long.valueOf(row[9]));
+                vlrSummary.setStartTime(DateFormatToLocal.strDDMMYYYYtoYYYYMMDD(str[0]));
+                vlrSummary.setMsxName(CastToType.strRmvQuotes(str[2]));
+                vlrSummary.setVlrLocal(CastToType.strToLong(str[5]));
+                vlrSummary.setVlrRoaming(CastToType.strToLong(str[6]));
+                vlrSummary.setVlrCamel(CastToType.strToLong(str[7]));
+                vlrSummary.setTotal(CastToType.strToLong(str[8]));
+                vlrSummary.setVlrSGs(CastToType.strToLong(str[10]));
 
                 vlrSummaries.add(vlrSummary);
             }
 
-        System.out.println(vlrSummaries);
+        saveAll(vlrSummaries);
 
     }
 
@@ -77,6 +76,5 @@ public class VlrSummaryServiseImpl implements VlrSummaryService {
     public List<VlrSummary> findAll() {
         return vlrSummaryRepo.findAll();
     }
-
 
 }

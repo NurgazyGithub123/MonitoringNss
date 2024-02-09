@@ -26,6 +26,14 @@ final public class DateFormatToLocal {
 
         return weekNumber + "";
     }
+    public static String strDDMMYYYYtoYYYYMMDD(String ttt){
+        String year = ttt.substring(6,10);
+        String mm = ttt.substring(3,5);
+        String dd = ttt.substring(0,2);
+        String time = ttt.substring(10,19);
+        return year + "-" + mm + "-" + dd + time;
+    }
+
 
 
 }

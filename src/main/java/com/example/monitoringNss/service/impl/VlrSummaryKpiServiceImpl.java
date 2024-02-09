@@ -108,6 +108,7 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
             savedVlr.add( vlrSummaryKpi);
         }
         return savedVlr;
+
     }
 
 //    @Scheduled(cron = "0/60 * * * * ?")
