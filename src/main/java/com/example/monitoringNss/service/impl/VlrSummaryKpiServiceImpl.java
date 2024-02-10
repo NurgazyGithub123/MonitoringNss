@@ -15,6 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,8 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
     public VlrSummaryKpiDto avgDay(String date){
 
         VlrSummaryKpiDtoInterface vlrSummary = vlrSummaryKpiRepo.avgDay(LocalDate.parse(date));
-        VlrSummaryKpiDto vlrSummaryKpi = VlrSummaryKpiDto
+
+        return VlrSummaryKpiDto
                 .builder()
                 .id(vlrSummary.getId())
                 .vlr4g(vlrSummary.getVlr4g())
@@ -44,8 +46,6 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
                 .date(vlrSummary.getDate())
                 .week(vlrSummary.getWeek())
                 .build();
-
-        return vlrSummaryKpi;
     }
 
     @Override
@@ -111,11 +111,13 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
 
     }
 
-//    @Scheduled(cron = "0/60 * * * * ?")
-//    public void saveByVlrToTime(){
-//        System.out.println("gjgj");
-//        avgDayAll();
-//
-//    }
+
+   @Scheduled(fixedRate = 150000) // */15 * * * *
+    public void saveByVlrToTime(){
+        System.out.println("Запуск ср значение за день в tb_vlr_kpi: " + LocalDateTime.now());
+        avgDayAll();
+
+    }
+
 
 }

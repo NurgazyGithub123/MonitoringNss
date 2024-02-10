@@ -8,6 +8,7 @@ import java.util.Locale;
 
 final public class DateFormatToLocal {
 
+
     public static LocalDateTime dateFormat(String str){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return LocalDateTime.parse(str, formatter);
@@ -32,6 +33,12 @@ final public class DateFormatToLocal {
         String dd = ttt.substring(0,2);
         String time = ttt.substring(10,19);
         return year + "-" + mm + "-" + dd + time;
+    }
+
+    public static LocalDate lastDay(int a){
+        LocalDate time = LocalDate.now();
+
+        return time.minusDays(a);
     }
 
 
