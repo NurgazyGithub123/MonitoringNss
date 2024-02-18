@@ -18,7 +18,7 @@ public class VlrSummaryMapper {
 
         for (VlrSummaryRequest vlrSummary : vlrSummaryRequests) {
             VlrSummary savedVlrSummary = new VlrSummary();
-            savedVlrSummary.setStartTime(DateFormatToLocal.dateFormat(vlrSummary.getStartTime()));
+            savedVlrSummary.setStartTime(DateFormatToLocal.dateFormatУMD(vlrSummary.getStartTime()));
             savedVlrSummary.setMsxName(vlrSummary.getMsxName());
             savedVlrSummary.setVlrCamel(vlrSummary.getVlrCamel());
             savedVlrSummary.setVlrLocal(vlrSummary.getVlrLocal());
@@ -26,9 +26,9 @@ public class VlrSummaryMapper {
             savedVlrSummary.setVlrSGs(vlrSummary.getVlrSGs());
             savedVlrSummary.setTotal(vlrSummary.getTotal());
             savedVlrSummary.setBitel(vlrSummary.getTotal() - vlrSummary.getVlrCamel() - vlrSummary.getVlrRoaming());
-            savedVlrSummary.setDate(DateFormatToLocal.dateFormat(vlrSummary.getStartTime()).toLocalDate());
-            savedVlrSummary.setTime(DateFormatToLocal.dateFormat(vlrSummary.getStartTime()).toLocalTime());
-            savedVlrSummary.setYear(DateFormatToLocal.formatToYear(vlrSummary.getStartTime()));
+            savedVlrSummary.setDate(DateFormatToLocal.dateFormatУMD(vlrSummary.getStartTime()).toLocalDate());
+            savedVlrSummary.setTime(DateFormatToLocal.dateFormatУMD(vlrSummary.getStartTime()).toLocalTime());
+            savedVlrSummary.setYear(DateFormatToLocal.formatToYearStr(vlrSummary.getStartTime()));
             savedVlrSummary.setWeek(DateFormatToLocal.formatToWeek(vlrSummary.getStartTime()));
 
             list.add(savedVlrSummary);
@@ -90,7 +90,7 @@ public class VlrSummaryMapper {
     public VlrSummary requestToEntity(VlrSummaryRequest vlrSummaryRequests) {
 
             VlrSummary savedVlrSummary = new VlrSummary();
-            savedVlrSummary.setStartTime(DateFormatToLocal.dateFormat(vlrSummaryRequests.getStartTime()));
+            savedVlrSummary.setStartTime(DateFormatToLocal.dateFormatУMD(vlrSummaryRequests.getStartTime()));
             savedVlrSummary.setMsxName(vlrSummaryRequests.getMsxName());
             savedVlrSummary.setVlrCamel(vlrSummaryRequests.getVlrCamel());
             savedVlrSummary.setVlrLocal(vlrSummaryRequests.getVlrLocal());
@@ -98,9 +98,9 @@ public class VlrSummaryMapper {
             savedVlrSummary.setVlrSGs(vlrSummaryRequests.getVlrSGs());
             savedVlrSummary.setTotal(vlrSummaryRequests.getTotal());
             savedVlrSummary.setBitel(vlrSummaryRequests.getTotal() - vlrSummaryRequests.getVlrCamel() - vlrSummaryRequests.getVlrRoaming());
-            savedVlrSummary.setDate(DateFormatToLocal.dateFormat(vlrSummaryRequests.getStartTime()).toLocalDate());
-            savedVlrSummary.setTime(DateFormatToLocal.dateFormat(vlrSummaryRequests.getStartTime()).toLocalTime());
-            savedVlrSummary.setYear(DateFormatToLocal.formatToYear(vlrSummaryRequests.getStartTime()));
+            savedVlrSummary.setDate(DateFormatToLocal.dateFormatУMD(vlrSummaryRequests.getStartTime()).toLocalDate());
+            savedVlrSummary.setTime(DateFormatToLocal.dateFormatУMD(vlrSummaryRequests.getStartTime()).toLocalTime());
+            savedVlrSummary.setYear(DateFormatToLocal.formatToYearStr(vlrSummaryRequests.getStartTime()));
             savedVlrSummary.setWeek(DateFormatToLocal.formatToWeek(vlrSummaryRequests.getStartTime()));
 
             return savedVlrSummary;

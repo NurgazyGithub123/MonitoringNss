@@ -25,4 +25,6 @@ public interface VlrSummaryRepo extends JpaRepository<VlrSummary, Long> {
             "when 'MSOFTX3000-OSH' then 'Network' end as msxName\n" +
             "from tb_vlrsummary as tv GROUP BY tv.date, tv.week, tv.msx_name Order by tv.date) as res GROUP BY date, week, res.msxName Order by date", nativeQuery = true)
     List<VlrSummaryDtoInterface> avgDayAll ();
+
+
 }

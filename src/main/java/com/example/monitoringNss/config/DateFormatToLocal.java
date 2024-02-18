@@ -9,12 +9,17 @@ import java.util.Locale;
 final public class DateFormatToLocal {
 
 
-    public static LocalDateTime dateFormat(String str){
+    public static LocalDateTime dateFormatУMD(String str){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return LocalDateTime.parse(str, formatter);
     }
 
-    public static String formatToYear(String str){
+    public static LocalDateTime dateFormatDMY(String str){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return LocalDateTime.parse(str, formatter);
+    }
+
+    public static String formatToYearStr(String str){
         return str.substring(0, 4);
     }
 

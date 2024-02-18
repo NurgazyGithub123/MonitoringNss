@@ -1,5 +1,6 @@
 package com.example.monitoringNss.controller;
 
+import com.example.monitoringNss.domain.model.dto.VlrSummaryDto;
 import com.example.monitoringNss.domain.model.dto.VlrSummaryKpiDto;
 import com.example.monitoringNss.domain.model.entity.VlrSummary;
 import com.example.monitoringNss.domain.model.request.VlrSummaryRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -53,9 +55,17 @@ public class VlrSummaryController {
         return vlrSummaryKpiService.findAvgDateAll();
     }
 
-    @PostMapping(value = "/uploadCsv")
-    public ResponseEntity<?> uploadVlrSummary() throws IOException, CsvException {
-        vlrSummaryService.uploadVlrSummary();
+    @PostMapping(value = "/uploadCsvAllDate")
+    public ResponseEntity<?> uploadVlrSummaryAllDate() throws IOException, CsvException {
+        vlrSummaryService.uploadVlrSummaryAllDate();
+
+        return ResponseEntity
+                .status(HttpStatus.OK).body("Success");
+    }
+
+    @PostMapping(value = "/uploadCsvYesterday")
+    public ResponseEntity<?> uploadVlrSummaryYesterday() throws IOException, CsvException {
+        vlrSummaryService.uploadVlrSummaryPeriod();
 
         return ResponseEntity
                 .status(HttpStatus.OK).body("Success");
@@ -68,7 +78,7 @@ public class VlrSummaryController {
         httpServletResponse.setContentType("text/csv");
         httpServletResponse.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename " + fileName + "");
 
-        StatefulBeanToCsv<VlrSummary> writer = new StatefulBeanToCsvBuilder<VlrSummary>(httpServletResponse.getWriter())
+        StatefulBeanToCsv<VlrSummaryDto> writer = new StatefulBeanToCsvBuilder<VlrSummaryDto>(httpServletResponse.getWriter())
                 .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
                 .withOrderedResults(false)
                 .build();

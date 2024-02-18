@@ -48,6 +48,7 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
                 .build();
     }
 
+
     @Override
     public List<VlrSummaryKpiDto> avgDayAll() {
 
@@ -112,7 +113,7 @@ public class VlrSummaryKpiServiceImpl implements VlrSummaryKpiService {
     }
 
 
-   @Scheduled(fixedRate = 150000) // */15 * * * *
+//   @Scheduled(fixedRate = 1600000) // */15 * * * *
     public void saveByVlrToTime(){
         System.out.println("Запуск ср значение за день в tb_vlr_kpi: " + LocalDateTime.now());
         avgDayAll();
