@@ -4,9 +4,6 @@ package com.example.monitoringNss.service.impl;
 import com.example.monitoringNss.config.DateFormatToLocal;
 import com.example.monitoringNss.config.CastToType;
 import com.example.monitoringNss.domain.model.dto.VlrSummaryDto;
-import com.example.monitoringNss.domain.model.dto.VlrSummaryKpiDto;
-import com.example.monitoringNss.domain.model.dto.dtos.VlrSummaryKpiDtoInterface;
-import com.example.monitoringNss.domain.model.entity.VlrSummary;
 import com.example.monitoringNss.domain.model.mapper.VlrSummaryMapper;
 import com.example.monitoringNss.domain.model.request.VlrSummaryRequest;
 import com.example.monitoringNss.domain.repository.VlrSummaryRepo;
@@ -17,15 +14,12 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 
 import java.io.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -44,7 +38,9 @@ public class VlrSummaryServiseImpl implements VlrSummaryService {
 
         return VlrSummaryMapper.INSTANCE.entityToDtoList(vlrSummaryRepo.saveAll
                         (VlrSummaryMapper.INSTANCE.requestToEntityList(createVlrSummaryRequest)));
+
     }
+
 
     @Override
     public void uploadVlrSummaryAllDate() throws IOException, CsvException {
@@ -100,6 +96,8 @@ public class VlrSummaryServiseImpl implements VlrSummaryService {
 
             if((String.valueOf(date)).equals(DateFormatToLocal.strDDMMYYYYtoYYYYMMDD(row[0]).substring(0,10))){
                 VlrSummaryRequest vlrSummary = new VlrSummaryRequest();
+
+                System.out.println(row);
 
                 String[] str = row[0].split(",");
 

@@ -1,41 +1,34 @@
 package com.example.monitoringNss.domain.model.entity;
 
-
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
-@Builder
 @ToString
-@Table(name = "tb_asr_kpi")
+@Builder
+@Table(name = "kpi")
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AsrKpi{
+public class Kpi {
 
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "TIMESTAMP ")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String objectInstance;
+    LocalDateTime result_time;
 
-    LocalDate date;
+    String fileName;
 
-    int callAttemptTimes;
+    String granularity_period;
 
-    int answerTimes;
+    String counterName;
 
-    Integer sucAttempt;
-
-    Double asr;
-
-    Double ner;
-
-
+    String json_value;
 }

@@ -1,41 +1,33 @@
 package com.example.monitoringNss.domain.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
-@Builder
 @ToString
-@Table(name = "tb_asr_kpi")
+@Builder
+@Table(name = "tb_test_class")
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AsrKpi{
+@JsonAutoDetect
+public class TestClassEntity {
 
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "TIMESTAMP ")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String objectInstance;
+    String json;
 
-    LocalDate date;
-
-    int callAttemptTimes;
-
-    int answerTimes;
-
-    Integer sucAttempt;
-
-    Double asr;
-
-    Double ner;
+    LocalDateTime startTime;
 
 
 }
