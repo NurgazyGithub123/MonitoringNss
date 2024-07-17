@@ -25,7 +25,9 @@ public class TestClassEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String json;
+    String counterName;
+
+    String counterValues;
 
     LocalDateTime startTime;
 

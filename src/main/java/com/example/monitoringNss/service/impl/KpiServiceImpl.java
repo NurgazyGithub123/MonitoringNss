@@ -1,7 +1,7 @@
 package com.example.monitoringNss.service.impl;
 
+import com.example.monitoringNss.config.DateFormatToLocal;
 import com.example.monitoringNss.domain.KpiDto;
-import com.example.monitoringNss.domain.model.entity.Asr;
 import com.example.monitoringNss.domain.model.entity.Kpi;
 import com.example.monitoringNss.domain.model.entity.TestClassEntity;
 import com.example.monitoringNss.domain.repository.KpiRepo;
@@ -23,10 +23,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -43,9 +45,8 @@ public class KpiServiceImpl implements KpiService {
     public static final String userNameSftp = "gkkuser";
     public static final String passwordSftp = "lB6TqUo8K9Atg1asuFBC!";
 
-    public final String direct = "/export/home/sysm/opt/oss/server/var/fileint/pm/pmexport_20240330/";
-
-    public final String pathNameVEPC = "HOST05_pmresult_50331651_60_202403302000_202403302100.csv";
+    public final String direct = "/export/home/sysm/opt/oss/server/var/fileint/pm/pmexport_";
+    public final String pathNameVEPC = "HOST05_pmresult_50331649_60_202407150000_202407150100.csv";
     @Override
     public void uploadVlrSummaryPeriod() throws JSchException {
         connectSftp();
@@ -53,11 +54,14 @@ public class KpiServiceImpl implements KpiService {
 
     public void connectSftp() throws JSchException {
 
+        String yesterDay = String.valueOf(LocalDate.now().minusDays(2));
+        String yesterDayStr = yesterDay.replaceAll("-", "").trim();
+
         String host = "10.255.0.44";
         int port = 22;
         String username = "gkkuser";
         String password = "lB6TqUo8K9Atg1asuFBC!";
-        String pathName = direct;
+        String pathName = direct + yesterDayStr + "/";
 
         String fileName = pathNameVEPC;
 
@@ -71,60 +75,41 @@ public class KpiServiceImpl implements KpiService {
         List<KpiDto> kpiDtos = new ArrayList<>();
 
         try {
+
             String line;
             InputStream stream = sftp.get(pathName + fileName);
             InputStreamReader inputStreamReader = new InputStreamReader(stream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String headers = bufferedReader.readLine();
 
-
-            while ((line = bufferedReader.readLine()) != null) {
-                TestClassEntity testClass = new TestClassEntity();
+            while ((line = bufferedReader.readLine()) != null){
 
                 String[] data = line.split(",");
-                String[] data2 = headers.split(",");
+                String[] header = headers.split(",");
+                String saveJson = "";
 
-
-//                if (data[0].isEmpty() || Integer.parseInt(data[getIndexVlrCounter(data2)]) == 0) {
-//                    continue;
-//                }
                 if (data[0].isEmpty()) {
                     continue;
                 }
 
-                System.out.println("NNNNNNNNNNNNNNN"  +   data[0]);
-//                Kpi kpi = new Kpi();
-//                kpi.setResult_time(LocalDateTime.parse(data[0]));
-//                kpi.setCounterName(data[2]);
-//                kpi.setFileName(fileName);
-//                kpi.setGranularity_period(data[1]);
+                for (int i = 0; i < header.length; i++) {
 
-                for (int i = 0; i < 7; i++) {
-                    System.out.println("data2 : index " + i + " ::::::::" + data2[i]);
-                    System.out.println("data : index " + i + " ::::::::" + data[i]);
+                    StringBuilder jsonBuilder = new StringBuilder("{");
+
+                    jsonBuilder.append("\"").append(header[i].replace("\"", ""), 0, Math.min(header[i].replace("\"", "").length(), 10)).append("\": \"").append(data[i].replace("\"", "")).append("\"");
+
+                    jsonBuilder.append("}");
+
+                    String jsonValue = jsonBuilder.toString();
+
+                    saveJson = saveJson + jsonValue;
+
                 }
 
+                Kpi saveKpi = setKpi(data, saveJson, fileName);
 
-//                for (int i = 4; i < data2.length; i++) {
-//                    KpiDto kpiDto = new KpiDto();
-//                    kpiDto.setKey(data2[i]);
-//                    kpiDto.setValue(data[i + 2]);
-//
-//                    kpiDtos.add(kpiDto);
-//                    System.out.println(kpiDtos);
-//                }
-
-                Gson gson = new Gson();
-                System.out.print(gson.toJson(kpiDtos));
-//                testClass.setStartTime(setDate(data));
-//                testClass.setJson(data[getIndexVlrCounter(data2)]);
-//
-//                System.out.println(testClass);
-
- //               kpiRepo.save(testClass);
-
+                kpiRepo.save(saveKpi);
             }
-
 
         } catch (SftpException e) {
             throw new RuntimeException(e);
@@ -143,14 +128,23 @@ public class KpiServiceImpl implements KpiService {
         }
         return null;
     }
+
+    public Kpi setKpi(String[] date, String gson, String fileName){
+
+        Kpi kpi = new Kpi();
+        kpi.setGranularity_period(date[1]);
+        kpi.setResult_time(DateFormatToLocal.dateFormatУMDnotSS(date[0]));
+        kpi.setFileName(fileName);
+        kpi.setJson_value(gson);
+
+        return kpi;
+    }
+
     public LocalDateTime setDate(String[] data){
         if (!data[0].isEmpty()){
             return LocalDateTime.parse(data[0],sftpConfigService.formatterMin);
 
         }
         return LocalDateTime.now();
-
     }
-
-
 }

@@ -1,6 +1,5 @@
 package com.example.monitoringNss.controller;
 
-import com.example.monitoringNss.domain.model.dto.VlrSummaryDto;
 import com.example.monitoringNss.domain.model.dto.VlrSummaryKpiDto;
 import com.example.monitoringNss.service.VlrSummaryKpiService;
 import com.opencsv.CSVWriter;

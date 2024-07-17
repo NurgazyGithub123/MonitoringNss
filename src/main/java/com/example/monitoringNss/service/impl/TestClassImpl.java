@@ -1,6 +1,8 @@
 package com.example.monitoringNss.service.impl;
 
+import com.example.monitoringNss.domain.model.entity.Kpi;
 import com.example.monitoringNss.domain.model.entity.TestClassEntity;
+import com.example.monitoringNss.domain.repository.KpiRepo;
 import com.example.monitoringNss.domain.repository.TestClassRepo;
 import com.example.monitoringNss.service.SftpConfigService;
 import com.example.monitoringNss.service.TestClass;
@@ -14,7 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.*;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Slf4j
@@ -25,12 +28,8 @@ public class TestClassImpl implements TestClass {
 
     @NonNull SftpConfigService sftpConfigService;
     @NonNull TestClassRepo testClassRepo;
+    @NonNull KpiRepo kpiRepo;
 
-//    String jdbcURL = "jdbc:postgresql://localhost:5432/testasr";
-//
-//    String userName = "postgres";
-//
-//    String password = "1234";
 
     public static final String host = "10.255.0.44";
     public static final int port = 22;
@@ -71,9 +70,9 @@ public void connectSftp() throws JSchException {
                 TestClassEntity testClass = new TestClassEntity();
                 String[] data = line.split(",");
                 String[] data2 = headers.split(",");
-                if (data[0].isEmpty() || Integer.parseInt(data[getIndexVlrCounter(data2)]) == 0) {
-                    continue;
-                }
+//                if (data[0].isEmpty() || Integer.parseInt(data[getIndexVlrCounter(data2)]) == 0) {
+//                    continue;
+//                }
 
 
                // testClassRepo.save(testClass);
@@ -123,21 +122,77 @@ public void connectSftp() throws JSchException {
         return matchingFiles;
     }
 
-    public Integer getIndexVlrCounter(String[] data) {
-
-        String columnName = "50331654";
-
-        for (int i = 0; i < data.length; i++) {
-            if (data[i].contains(columnName)) {
-                return i+1;
-            }
-        }
-        return null;
-    }
+//    public TestClassEntity getIndexVlrCounter(String counterName) {
+//    List<TestClassEntity> testClassEntities = new ArrayList<>();
+//    List<Kpi> kpiList = kpiRepo.findAll();
+//
+//
+//        for (int i = 0; i < kpiList.size(); i++) {
+//            if (kpiList.get(i).getJson_value().contains(counterName)) {
+//                TestClassEntity testClass = new TestClassEntity();
+//                testClass.setStartTime(kpiList.get(i).getResult_time());
+//                testClass.setCounterName(counterName);
+//                testClass.setCounterValues(kpiList.get(i).getJson_value().matches([^counterName]);
+//
+//            }
+//        }
+//
+//        testClassRepo.saveAll(testClassEntities);
+//        return null;
+//    }
 
     @Override
     public void uploadVlrSummaryPeriod() throws JSchException {
-        connectSftp();
+
+    List<Kpi> kpi = kpiRepo.findAll();
+
+    for (Kpi saveKpi : kpi){
+        TestClassEntity testClass = new TestClassEntity();
+        testClass.setStartTime(saveKpi.getResult_time());
+        testClass.setCounterName("50332580");
+        testClass.setCounterValues(castJsonToCounterValue(saveKpi.getJson_value(), "50332580"));
+
+        testClassRepo.save(testClass);
+    }
+
+
+        //connectSftp();
        // getDirectory();
+
+        //getIndexVlrCounter("1526727189");
+    }
+
+    public String castJsonToCounterValue(String json, String counterName) {
+
+        String str = "{\"Result Tim\": \"2024-07-15 12:30\"}{\"Granularit\": \"15\"}{\"Object Nam\": \"KarBu7sLW/S1Interface:eNodeB Function Name=KarBu7sWL\"}{\"Reliabilit\": \" S1Interface ID=40000\"}{\"1526727188\": \"Reliable\"}{\"1526727189\": \"0\"}";
+        String[] str1 = json.split(": \"");
+        boolean isTrue = false;
+        int counter = 0;
+
+        for (int i = 0; i < str1.length; i++) {
+
+            String text = str1[i];
+            Pattern p = Pattern.compile(counterName + "+?");
+            Matcher m = p.matcher(str1[i]);
+
+            String test = "";
+
+            while (m.find()) {
+                test = str1[i].substring(m.start(), m.end());
+            }
+
+            System.out.println(test);
+
+            if (counterName.equals(test)) {
+                isTrue = true;
+                counter = i;
+                System.out.println(counter);
+            }
+        }
+
+        String b = str1[counter + 1];
+        String[] fin = b.split("\"");
+
+        return fin[0];
     }
 }

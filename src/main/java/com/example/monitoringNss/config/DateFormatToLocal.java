@@ -14,6 +14,11 @@ final public class DateFormatToLocal {
         return LocalDateTime.parse(str, formatter);
     }
 
+    public static LocalDateTime dateFormatУMDnotSS(String str){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return LocalDateTime.parse(str, formatter);
+    }
+
     public static LocalDateTime dateFormatDMY(String str){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         return LocalDateTime.parse(str, formatter);

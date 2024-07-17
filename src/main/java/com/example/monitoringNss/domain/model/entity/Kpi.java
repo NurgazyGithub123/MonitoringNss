@@ -22,13 +22,16 @@ public class Kpi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(name = "result_time")
     LocalDateTime result_time;
 
+    @Column(name = "file_name")
     String fileName;
 
+    @Column(name = "granularity_period")
     String granularity_period;
 
-    String counterName;
-
+    @Column(name = "json_value", columnDefinition = "TEXT")
     String json_value;
+
 }
